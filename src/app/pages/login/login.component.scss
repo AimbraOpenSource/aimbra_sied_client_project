@@ -1,0 +1,29 @@
+mat-card {
+  width: 400px;
+  padding: 50px;
+  margin: {
+    top: 40px;
+    right: auto;
+    bottom: 0;
+    left: auto;
+  };
+}
+
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn-container {
+  text-align: right;
+}
+
+.fix-margin {
+  margin: 0 -16px;
+}
