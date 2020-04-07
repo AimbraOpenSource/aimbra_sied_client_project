@@ -18,5 +18,13 @@ export class LocalStorageService {
     return user;
   }
 
+  public set token(value: string) {
+    window.localStorage.setItem('token', value);
+  }
+
+  public get token(): string {
+    return window.localStorage.getItem('token');
+  }
+
 
 }

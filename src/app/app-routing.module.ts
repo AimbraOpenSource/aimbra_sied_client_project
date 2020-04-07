@@ -4,22 +4,28 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './security/auth/auth.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'painel',
-    component: DashboardComponent
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    component: LoginComponent
-  }
+    component: LoginComponent,
+  },
+  {
+    path: 'painel',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule)
+  },
 ];
 
 @NgModule({

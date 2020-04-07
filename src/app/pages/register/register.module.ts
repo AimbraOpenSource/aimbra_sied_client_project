@@ -1,20 +1,30 @@
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
-
+import { RegisterComponent } from './register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { SelectUserRoleModule } from 'src/app/shared/sheets/select-user-role/select-user-role.module';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: RegisterComponent,
+  },
+];
+
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -23,8 +33,9 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatGridListModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatBottomSheetModule,
+    SelectUserRoleModule
   ],
-  exports: [LoginComponent],
 })
-export class LoginModule { }
+export class RegisterModule {}

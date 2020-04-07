@@ -1,54 +1,39 @@
 <div class="login-container">
 <mat-card>
-
-
     <mat-card-header [ngClass]="{'fix-margin': true}">
       <mat-card-title>Login</mat-card-title>
       <mat-card-subtitle>Preencha os campos para entrar no sistema</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-
       <form class="form" [formGroup]="loginFormGroup" novalidate autocomplete="off">
-        <mat-form-field class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput [formControl]="emailFormControl" [errorStateMatcher]="emailMatcher"
-            placeholder="Ex. pat@example.com">
-          <mat-hint>É preciso informar um email</mat-hint>
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Por favor, digite um email válido
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email é <strong>obrigatório</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-label>Senha</mat-label>
-          <input matInput [formControl]="passwordFormControl" [errorStateMatcher]="passwordMatcher" type="password"
-            placeholder="Entre com sua senha">
-          <mat-hint>É preciso informar sua senha</mat-hint>
-          <mat-error
-            *ngIf="(emailFormControl.hasError('minLength') || emailFormControl.hasError('maxLength')) && !emailFormControl.hasError('required')">
-            Por favor, digite um senha válida entre 6 a 16 caracteres.
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Senha é <strong>obrigatório</strong>
-          </mat-error>
-        </mat-form-field>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" placeholder="Entre com seu email" [formControl]="emailFormControl">
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" class="form-control" placeholder="Entre com sua senha" [formControl]="passwordFormControl">
+        </div>
       </form>
-
-
     </mat-card-content>
 
     <mat-card-actions>
-      <div>
-        <div class="content-forgot">
-          <p>Esqueceu sua senha?</p>
+      <div class="d-flex flex-row justify-content-between">
+        <div class="mt-2">
+          <a href="javascript: void;">Esqueceu sua senha?</a>
         </div>
-        <div class="btn-container">
+        <div>
           <button mat-raised-button color="primary" (click)="login()">Continuar</button>
         </div>
+      </div>
+    </mat-card-actions>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+      <div class="mt-4 text-center">
+        <a [routerLink]="['/registro']">Ainda não tem cadastro?</a>
       </div>
     </mat-card-actions>
 
