@@ -1,27 +1,35 @@
 # SiedClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+Para instalar esta aplicação, é necessário ter instalado em sua máquina:
 
-## Development server
+1. NodeJs - v10+
+2. Angular v9+
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Após fazer o clone deste repositório, execute o comando para instalar as dependências:
 
-## Code scaffolding
+<code>npm install</code>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Após, é preciso ter o angular cli instalado. Para instalar, use:
+<code>npm install -G @angular/cli</code>
+
+Assim, ele ira instalar a ultima versão da aplicação de linha de comando.
+
+Agora, esta aplicação roda com um proxy a ser executado em modo de desenvolvimento. Logo, ao invés de executar <code>ng serve</code>
+
+execute: <code> npm start</code>
+
+O servidor em Java precisa estar em execução para que esta aplicação funcione perfeitamente. Por padrão, a aplicação Java esta sendo executado na porta 9001.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Para Buildar a aplicação em modo de produção, e rodar em seu servidor Apache, nGinx ou outro compativel. Use:
 
-## Running unit tests
+<code>ng build --prod</code>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Lembre-se de mudar a rota no parametro URL do arquivo environmnet com o domínio pai. Por exemplo:
 
-## Running end-to-end tests
+https://catolicamacae.com.br
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Problema de CROS ORIGIN
+Para resolver facilmente esta segurança, é preciso fazer a configuração ou a nível de servidor, ou a nível de aplicação através do SpringBoot Application.
+Ou, para facilitar, executar um software que gerencia containers para trabalhar com recursos de microserviços. Pois, a plataforma fora construída de forma a ser escalada num formato horizontal. Ou seja, multiplas aplicações com funcionalidades distintas.
