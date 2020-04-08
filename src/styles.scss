@@ -4,3 +4,23 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+aside {
+  .mat-list-base .mat-list-item {
+    font-size: 14px;
+  }
+  .mat-list-item-content {
+    margin: -14px;
+    &:hover {
+      color: rgb(0, 143, 226);
+      cursor: pointer;
+    }
+  }
+  h2.section-title {
+    font-size: 1.3rem;
+  }
+}
+
+.container-page {
+  padding: 50px 20px;
+}

@@ -1,0 +1,31 @@
+.avatar {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50px;
+  background-size: cover;
+}
+
+h5.name, h6.course {
+  margin: 0;
+  padding: 0;
+}
+
+h5.name {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.h6.course {
+  font-weight: normal;
+}
+
+section.profile {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0 0 0 -10px;
+  &:hover {
+    background-color: rgb(240, 240, 240);
+  }
+}

@@ -17,6 +17,8 @@ import { AuthGuard } from './security/auth/auth.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthInterceptor } from './security/auth/auth-interceptor';
 import { RegisterModule } from './pages/register/register.module';
+import { MenuSidebarModule } from './shared/menu-sidebar/menu-sidebar.module';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { RegisterModule } from './pages/register/register.module';
     DashboardModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MenuSidebarModule,
+    MatDividerModule
   ],
   providers: [
     AuthService,

@@ -1,7 +1,7 @@
 import { environment } from './../../../environments/environment';
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ProfessorModel } from 'src/app/core/models/professor.model';
 import { AlunoModel } from 'src/app/core/models/aluno.model';
+import { UserRole } from 'src/app/core/models/user-role.model';
 
 @Injectable({
   providedIn: 'root',
@@ -65,7 +66,12 @@ export class AuthService {
   }
 
   public get user(): UserModel {
+    console.log(this.localStorageService.user);
     return this.localStorageService.user;
+  }
+
+  public get role(): UserRole {
+    return this.localStorageService.user.role;
   }
 
   public get token(): string {

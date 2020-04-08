@@ -9,9 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class ProfessorService {
 
-  private URL = environment;
+  private URL = environment.url + '/professores';
 
   constructor(private http: HttpClient) { }
+
+  public findByLoggedin(): Observable<ProfessorModel> {
+    return this.http.get<ProfessorModel>(this.URL);
+  }
 
 
 }

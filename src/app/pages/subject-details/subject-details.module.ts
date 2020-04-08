@@ -1,23 +1,23 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
-
+import { SubjectDetailsComponent } from './subject-details.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
+    component: SubjectDetailsComponent,
   },
 ];
 
 
+
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [SubjectDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
   ],
-  exports: [DashboardComponent],
+  exports: [SubjectDetailsComponent],
 })
-export class DashboardModule { }
+export class SubjectDetailsModule { }

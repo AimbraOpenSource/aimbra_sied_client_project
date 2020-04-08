@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 
 
 import { AuthService } from './security/auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ export class AppComponent {
 
   constructor(private authService: AuthService) {}
 
-  public isLoggedin(): boolean {
-    return this.authService.isLoggedin();
+  public get isLoggedIn(): boolean {
+    return  this.authService.isLoggedin();
   }
 
 

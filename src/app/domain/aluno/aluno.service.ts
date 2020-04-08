@@ -9,9 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class AlunoService {
 
-  private URL = environment;
+  private URL = environment.url + '/alunos';
 
   constructor(private http: HttpClient) { }
+
+  public findByLoggedin(): Observable<AlunoModel> {
+    return this.http.get<AlunoModel>(this.URL);
+  }
 
 
 }
