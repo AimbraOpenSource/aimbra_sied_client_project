@@ -1,18 +1,52 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
+import { LoginModule } from './pages/login/login.module';
+import { RouterModule } from '@angular/router';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { AuthService } from './security/auth/auth.service';
+import { AuthGuard } from './security/auth/auth.guard';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthInterceptor } from './security/auth/auth-interceptor';
+import { RegisterModule } from './pages/register/register.module';
+import { MenuSidebarModule } from './shared/menu-sidebar/menu-sidebar.module';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    LoginModule,
+    RegisterModule,
+    DashboardModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MenuSidebarModule,
+    MatDividerModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

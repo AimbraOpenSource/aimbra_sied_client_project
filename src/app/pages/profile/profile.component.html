@@ -1,0 +1,51 @@
+<mat-card class="mb-3">
+    <h1>Perfil</h1>
+    <p class="text-muted">Caso deseje alterar suas informações do sistema, <a href="javascript: void;" (click)="modoEdit = !modoEdit">clique aqui!</a></p>
+</mat-card>
+
+<mat-card>
+  <section>
+    <div class="row">
+      <div class="col-12">
+        <h3>Minhas informações</h3>
+      </div>
+    </div>
+
+    <div>
+      <form [formGroup]="personalFormGroup" *ngIf="!!professor || !!aluno" >
+        <div class="form-group">
+          <label>Nome e Sobrenome:</label>
+          <h5 *ngIf="professor && !modoEdit" >{{ professor.nome }}</h5>
+          <h5 *ngIf="aluno && !modoEdit" >{{ aluno.nome }}</h5>
+          <input *ngIf="modoEdit" type="text" class="form-control" placeholder="Entre com nome e sobrenome" formControlName="name">
+        </div>
+        <div class="form-group">
+          <label>Apelido</label>
+          <h5 *ngIf="!modoEdit">{{ user.username }}</h5>
+          <input *ngIf="modoEdit" type="text" class="form-control" placeholder="Entre com um apelido" formControlName="username">
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <h5 *ngIf="!modoEdit">{{ user.email }}</h5>
+          <input *ngIf="modoEdit" type="email" class="form-control" placeholder="Entre com seu email" formControlName="email">
+        </div>
+        <div class="form-group" *ngIf="modoEdit">
+          <label>Senha</label>
+          <input type="password" class="form-control" placeholder="Entre com sua senha" formControlName="password">
+        </div>
+        <div class="form-group" *ngIf="modoEdit">
+          <label>Repita senha</label>
+          <input *ngIf="modoEdit" type="password" class="form-control" placeholder="Entre com sua senha novamente"
+            formControlName="repeatPassword">
+        </div>
+      </form>
+      <mat-divider *ngIf="modoEdit"></mat-divider>
+      <mat-card-actions *ngIf="!!aluno || !!professor && modoEdit">
+        <button mat-raised-button color="primary" (click)="initUpdate()">Salvar Alterações</button>
+
+      </mat-card-actions>
+    </div>
+
+
+  </section>
+</mat-card>

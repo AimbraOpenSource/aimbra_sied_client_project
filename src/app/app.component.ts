@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
+
+
+import { AuthService } from './security/auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'sied-client';
+
+  constructor(private authService: AuthService) {}
+
+  public get isLoggedIn(): boolean {
+    return  this.authService.isLoggedin();
+  }
+
+
+
 }

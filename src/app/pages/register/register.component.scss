@@ -1,0 +1,32 @@
+mat-card {
+  width: 400px;
+  padding: 35px;
+  margin: {
+    top: 40px;
+    right: auto;
+    bottom: 0;
+    left: auto;
+  };
+}
+
+.mat-card>.mat-card-actions:last-child {
+  margin: 0;
+}
+
+.img-fluid {
+  width: 100px;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.fix-margin {
+  margin: 0 -16px;
+}
