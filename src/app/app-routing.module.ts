@@ -55,6 +55,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'zoom',
+    loadChildren: () => import('./pages/zoom/users/users.module').then(m => m.UsersModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
