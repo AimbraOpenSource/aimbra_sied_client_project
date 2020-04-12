@@ -1,0 +1,18 @@
+.file-input-area {
+  label {
+    box-shadow: black;
+  }
+}
+
+.card-file {
+  color: #46CCCC;
+  &:hover {
+    background-color: #46CCCC !important;
+    color: white !important;
+    cursor: pointer;
+  }
+}
+
+textarea {
+  min-height: 100px;
+}
