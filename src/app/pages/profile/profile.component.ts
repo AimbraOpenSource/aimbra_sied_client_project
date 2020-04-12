@@ -9,6 +9,7 @@ import { AlunoModel } from 'src/app/core/models/aluno.model';
 import { ProfessorModel } from 'src/app/core/models/professor.model';
 import { UserRole } from 'src/app/core/models/user-role.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private alunoService: AlunoService,
     private professorService: ProfessorService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -106,6 +108,10 @@ export class ProfileComponent implements OnInit {
         duration: 5000
       });
     });
+  }
+
+  logout() {
+    this.authService.logout().subscribe(() => this.router.navigate(['/']));
   }
 
   initUpdate() {

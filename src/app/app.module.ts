@@ -1,3 +1,4 @@
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -36,7 +37,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatToolbarModule,
     MatSnackBarModule,
     MenuSidebarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatFormFieldModule
   ],
   providers: [
     AuthService,

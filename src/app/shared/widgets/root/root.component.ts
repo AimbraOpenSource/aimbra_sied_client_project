@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root-widget',
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss']
 })

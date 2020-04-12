@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/security/auth/auth.service';
+import { UserModel } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-user-widget',
@@ -8,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class UserWidgetComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  user: UserModel;
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.authService.user;
   }
 
   goToUrl(path: string) {

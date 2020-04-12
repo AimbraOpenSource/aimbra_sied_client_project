@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule,
     MatListModule,
     MatIconModule
-  ]
+  ],
+  exports: [RootComponent],
 })
 export class RootModule { }

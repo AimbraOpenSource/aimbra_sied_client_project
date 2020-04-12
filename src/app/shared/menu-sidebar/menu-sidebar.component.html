@@ -10,13 +10,16 @@
         <app-user-widget></app-user-widget>
       </div>
       <div>
-        <app-subjects></app-subjects>
+        <app-subjects *ngIf="isAluno() || isRoot()" ></app-subjects>
       </div>
       <div>
-        <app-teacher-management></app-teacher-management>
+        <app-teacher-management *ngIf="isProfessor() || isRoot()"></app-teacher-management>
       </div>
       <div>
         <app-institutional></app-institutional>
+      </div>
+      <div>
+        <app-root-widget></app-root-widget>
       </div>
 
     </div>

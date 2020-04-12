@@ -24,3 +24,10 @@ aside {
 .container-page {
   padding: 50px 20px;
 }
+
+
+input.form-control {
+  &:focus {
+    box-shadow: unset;
+  }
+}

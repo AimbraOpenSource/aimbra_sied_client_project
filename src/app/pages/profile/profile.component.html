@@ -1,7 +1,13 @@
 <mat-card class="mb-3">
     <h1>Perfil</h1>
     <p class="text-muted">Caso deseje alterar suas informações do sistema, <a href="javascript: void;" (click)="modoEdit = !modoEdit">clique aqui!</a></p>
-</mat-card>
+    <div class="">
+      <button mat-raised-button color="primary" (click)="logout()">
+        <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+        Sair
+      </button>
+    </div>
+  </mat-card>
 
 <mat-card>
   <section>

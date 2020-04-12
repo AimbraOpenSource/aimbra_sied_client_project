@@ -36,7 +36,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'estudades',
+    path: 'meus-estudantes',
     loadChildren: () => import('./pages/students/students.module').then(m => m.StudentsModule),
     canActivate: [AuthGuard]
   },
@@ -46,8 +46,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'turmas',
+    path: 'sala-de-aula',
     loadChildren: () => import('./pages/classrooms/classrooms.module').then(m => m.ClassroosModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'minhas-turmas',
+    loadChildren: () => import('./pages/my-classes/my-classes.module').then(m => m.MyClassesModule),
     canActivate: [AuthGuard]
   },
   {

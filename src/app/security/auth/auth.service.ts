@@ -57,8 +57,9 @@ export class AuthService {
     this.router.navigate(['/login', btoa(path)]);
   }
 
-  public logout(): void {
+  public logout(): Observable<void> {
     window.localStorage.clear();
+    return new Observable();
   }
 
   public isLoggedin(): boolean {
