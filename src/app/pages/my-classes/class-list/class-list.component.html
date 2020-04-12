@@ -1,0 +1,61 @@
+<header>
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <h1>Aulas da Turma de {{ turma?.curso?.nome }}</h1>
+    </div>
+    <div>
+      <button mat-raised-button color="primary">
+        <mat-icon class="mat-18">add</mat-icon>
+        Adicionar nova aula
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="row mt-5">
+  <div class="col-9">
+
+    <mat-card *ngFor="let aula of aulas" >
+      <mat-card-header>
+        <mat-card-subtitle>Aula {{ aula.ordem }}</mat-card-subtitle>
+        <mat-card-title class="mt-1">{{ aula.titulo}}</mat-card-title>
+      </mat-card-header>
+      <mat-divider class="mb-3"></mat-divider>
+      <mat-card-content class="mt-3 pl-4 d-flex flex-row justify-content-between">
+        <div>
+          <button mat-stroked-button color="primary" class="mr-3" (click)="goToUrl('/atividades-enviadas', aula.id)" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'right'" matTooltipClass="bg-dark">Atividades enviadas</button>
+          <button mat-stroked-button color="accent" disabled>
+            <mat-icon class="mat-18">note_add</mat-icon>
+            Adicionar nova aula
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="goToUrl('/aulas', aula.id)" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+              <mat-icon class="mat-18">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="removeById(aula.id)" color="warn" matTooltip="Remove esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+              <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+  <div class="col-3">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Lista de alunos nesta turma</mat-card-title>
+            <mat-card-subtitle>Crie ações</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+              <mat-list-item *ngFor="let aluno of turma?.alunos">
+                <div mat-line>{{aluno?.nome}}</div>
+                <div mat-line> {{aluno?.user?.username | date}} </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+  </div>
+</div>

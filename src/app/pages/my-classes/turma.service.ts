@@ -8,7 +8,6 @@ import { CursoModel } from 'src/app/core/models/curso.model';
 @Injectable({providedIn: 'root'})
 export class TurmaService {
 
-
   private url = environment.url + '/turmas';
 
   constructor(private http: HttpClient) { }
@@ -27,6 +26,11 @@ export class TurmaService {
 
   public findByUuid(uuid: string): Observable<TurmaModel> {
     return this.http.get<TurmaModel>(`${this.url}/${uuid}`);
+  }
+
+  findById(turmaId: number): Observable<TurmaModel> {
+    const params = new HttpParams().set('turmaId', turmaId.toString());
+    return this.http.get<TurmaModel>(`${this.url}`, { params });
   }
 
   studentRegistration(key: string, uuidTurma: string): Observable<any> {

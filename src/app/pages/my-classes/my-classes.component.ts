@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DialogBaseModule } from 'src/app/components/dialog-base/dialog-base.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-classes',
@@ -34,8 +35,8 @@ export class MyClassesComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private authService: AuthService,
-    private turmaService: TurmaService
+    private turmaService: TurmaService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -105,8 +106,12 @@ export class MyClassesComponent implements OnInit {
     return this.turmas.length > 0;
   }
 
+  goToUrl(path: string, param: string) {
+    this.router.navigate([path, param]);
+  }
+
   onRowClick(turma: TurmaModel) {
-    console.log(turma);
+    this.goToUrl('/minhas-turmas', turma.id);
   }
 
   fazerConvite() {
