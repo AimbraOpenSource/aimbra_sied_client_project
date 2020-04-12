@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DialogBaseModule } from 'src/app/components/dialog-base/dialog-base.module';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     MatDialogModule,
     ClassroomFormModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    DialogBaseModule
   ]
 })
 export class MyClassesModule { }

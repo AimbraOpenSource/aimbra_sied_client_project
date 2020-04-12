@@ -1,3 +1,4 @@
+import { DialogBaseComponent, DialogData } from './../../components/dialog-base/dialog-base.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,7 @@ import { TurmaService } from './my-classes.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import { SelectionModel } from '@angular/cdk/collections';
+import { DialogBaseModule } from 'src/app/components/dialog-base/dialog-base.module';
 
 @Component({
   selector: 'app-my-classes',
@@ -44,6 +46,7 @@ export class MyClassesComponent implements OnInit {
     this.dialog.open(ClassroomFormComponent, {
       width: '500px',
       data: {
+        id: '1',
         title: 'Adicionar nova turma'
       }
     }).afterClosed().subscribe((result: CursoModel) => {
@@ -51,7 +54,31 @@ export class MyClassesComponent implements OnInit {
       if (this.turma.curso) {
         this.create();
       }
+    });
+  }
+  removeSelections() {
+    this.dialog.open(DialogBaseComponent, {
+      width: '500px',
+      id: '2',
+      data: {
+        title: 'Atenção!',
+        message: 'Você deseja realmente remover estas turmas?',
+        label: 'Digite SIM par confirmar',
+      }
+    }).afterClosed().subscribe((result: string) => {
+      if (result === 'SIM') {
+        this.removeAll();
+      }
+    });
 
+  }
+
+  removeAll() {
+    this.turmaService.removeAll(this.selection.selected).subscribe(() => {
+      this.selection.clear();
+      this.findAllTurmas();
+    }, (err: Error) => {
+      console.error(err);
     });
   }
 
@@ -103,12 +130,6 @@ export class MyClassesComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${ 1}`;
   }
 
-  removeSelections() {
-    this.turmaService.removeAll(this.selection.selected).subscribe(() => {
-      this.findAllTurmas();
-    }, (err: Error) => {
-      console.error(err);
-    });
-  }
+
 
 }

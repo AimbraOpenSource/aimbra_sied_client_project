@@ -31,3 +31,14 @@ input.form-control {
     box-shadow: unset;
   }
 }
+
+table {
+  tbody {
+    tr {
+      &:hover {
+        background-color: rgb(240,240,240);
+        cursor: pointer;
+      }
+    }
+  }
+}
