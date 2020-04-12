@@ -71,6 +71,7 @@ export class ClassListComponent implements OnInit {
   }
 
   goToUrl(path?: string, param?: string) {
+    console.log(path, param);
     if (path) {
       if (param) {
         this.router.navigate([path, param]);

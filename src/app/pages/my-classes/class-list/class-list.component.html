@@ -4,7 +4,7 @@
       <h1>Aulas da Turma de {{ turma?.curso?.nome }}</h1>
     </div>
     <div>
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" (click)="goToUrl('/minhas-turmas/formulario/modo/cria')">
         <mat-icon class="mat-18">add</mat-icon>
         Adicionar nova aula
       </button>
@@ -25,12 +25,12 @@
         <div>
           <button mat-stroked-button color="primary" class="mr-3" (click)="goToUrl('/atividades-enviadas', aula.id)" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'right'" matTooltipClass="bg-dark">Atividades enviadas</button>
           <button mat-stroked-button color="accent" disabled>
-            <mat-icon class="mat-18">note_add</mat-icon>
-            Adicionar nova aula
+            <mat-icon class="mat-18">play_arrow</mat-icon>
+            Lista de atividades
           </button>
         </div>
         <div>
-          <button mat-icon-button (click)="goToUrl('/aulas', aula.id)" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+          <button mat-icon-button [routerLink]="['/minhas-turmas/formulario/modo/edita', aula.id]" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
               <mat-icon class="mat-18">edit</mat-icon>
           </button>
           <button mat-icon-button (click)="removeById(aula.id)" color="warn" matTooltip="Remove esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
@@ -44,8 +44,8 @@
   <div class="col-3">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Lista de alunos nesta turma</mat-card-title>
-            <mat-card-subtitle>Crie ações</mat-card-subtitle>
+            <mat-card-title>Alunos</mat-card-title>
+            <!-- <mat-card-subtitle>Crie ações</mat-card-subtitle> -->
         </mat-card-header>
         <mat-card-content>
             <mat-list>

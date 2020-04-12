@@ -9,13 +9,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DialogBaseModule } from 'src/app/components/dialog-base/dialog-base.module';
 import { ClassListModule } from './class-list/class-list.module';
+import { ClassFormModule } from './class-form/class-form.module';
 
 const routes: Routes = [
   {
     path: '',
     component: MyClassesComponent
   },
-
+  {
+    path: 'formulario',
+    loadChildren: () => import('./class-form/class-form.module').then(m => m.ClassFormModule)
+  }
 ];
 
 
