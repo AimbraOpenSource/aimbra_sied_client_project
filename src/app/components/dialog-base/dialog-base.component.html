@@ -6,7 +6,7 @@
     <input class="form-control" [(ngModel)]="data.value">
   </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No, Obrigado!</button>
+<div mat-dialog-actions class="mb-1">
+  <button mat-button (click)="onNoClick()" *ngIf="data?.buttonCancel === true" >No, Obrigado!</button>
   <button mat-button color="primary" [mat-dialog-close]="data.value" cdkFocusInitial>Ok</button>
 </div>

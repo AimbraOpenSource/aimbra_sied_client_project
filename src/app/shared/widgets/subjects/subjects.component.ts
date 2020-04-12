@@ -1,5 +1,8 @@
+import { TurmaModel } from './../../../core/models/turma.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TurmaService } from 'src/app/pages/my-classes/turma.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-subjects',
@@ -8,13 +11,20 @@ import { Router } from '@angular/router';
 })
 export class SubjectsComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  turmas: TurmaModel[] = [];
+
+  constructor(private router: Router, private turmaService: TurmaService) { }
 
   ngOnInit(): void {
+    this.turmaService.findAllByStudentLoggedIn().subscribe((turmas: TurmaModel[]) => {
+      this.turmas = turmas;
+    }, (err: HttpErrorResponse) => {
+      console.log(err);
+    });
   }
 
-  goToUrl(path: string) {
-    this.router.navigate([path]);
+  goToUrl(uuid: string) {
+    this.router.navigate(['/disciplinas', uuid]);
   }
 
 }

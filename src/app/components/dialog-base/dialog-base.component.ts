@@ -6,6 +6,7 @@ export interface DialogData {
   message: string;
   label: string;
   value: string;
+  buttonCancel: boolean;
 }
 
 @Component({
@@ -18,9 +19,11 @@ export class DialogBaseComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogBaseComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
+
   }
 
   onNoClick(): void {

@@ -57,9 +57,8 @@ export class AuthService {
     this.router.navigate(['/login', btoa(path)]);
   }
 
-  public logout(): Observable<void> {
+  public logout() {
     window.localStorage.clear();
-    return new Observable();
   }
 
   public isLoggedin(): boolean {
@@ -67,7 +66,6 @@ export class AuthService {
   }
 
   public get user(): UserModel {
-    console.log(this.localStorageService.user);
     return this.localStorageService.user;
   }
 

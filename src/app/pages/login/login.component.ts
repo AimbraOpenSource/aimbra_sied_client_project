@@ -51,12 +51,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).subscribe((user: UserModel) => {
       this.user = user;
-      console.log('enter painel');
-      this.router.navigate(['/painel']);
     }, (error: HttpErrorResponse) => {
       this.snackBar.open(error.error.message, undefined, {
         duration: 3000
       });
-    });
+    }, () => this.router.navigate(['/painel']));
   }
 }

@@ -1,0 +1,19 @@
+<header>
+  <h1>Área de matrícula</h1>
+  <h4>Olá, {{ user?.username }}</h4>
+  <p>Preencha o campo abaixo para confirmar a matrícula da turma de {{ turma?.curso?.nome }}.</p>
+</header>
+
+<div class="alert alert-danger" *ngIf="user.role.toString() === 'PROFESSOR'" >Atenção!!! Esta é uma área exclusiva para estudante!</div>
+
+<section *ngIf="pinForm" >
+  <form [formGroup]="pinForm" class="d-flex flex-row justify-content-between">
+    <div *ngFor="let k of getKeys(); let i = index" >
+      <input type="text" class="form-control" formControlName="{{ k }}" maxlength="1" [ngClass]="{'border-left-styled': i === 0}" >
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="confirm()">Confirma</button>
+    </div>
+  </form>
+
+</section>
