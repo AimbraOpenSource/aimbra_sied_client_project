@@ -24,7 +24,7 @@ export class ClassFormComponent implements OnInit {
   aulaId: number;
   turmaId: number;
   times = times;
-  srcResult: any;;
+  srcResult: any;
   atividade: AtividadeModel;
 
   constructor(
