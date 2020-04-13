@@ -1,4 +1,4 @@
-<div class="row" *ngIf="isLoggedIn" >
+<div class="row" *ngIf="isLoggedin" >
   <div class="col-2">
     <app-menu-sidebar></app-menu-sidebar>
   </div>
@@ -10,6 +10,6 @@
     </main>
   </div>
 </div>
-<div *ngIf="!isLoggedIn">
+<div *ngIf="!isLoggedin">
   <router-outlet></router-outlet>
 </div>

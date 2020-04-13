@@ -1,20 +1,37 @@
-import { Component, Type } from '@angular/core';
+import { Component, Type, OnChanges, SimpleChanges, Injector, OnInit, OnDestroy, AfterContentChecked } from '@angular/core';
 
 
 import { AuthService } from './security/auth/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { UserModel } from './core/models/user.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  public _isLoggedIn: boolean;
 
-  public get isLoggedIn(): boolean {
-    return  this.authService.isLoggedin();
+  constructor(private authService: AuthService, private localstorageService: LocalStorageService) {}
+
+  ngOnInit(): void {
+    this.getIsLoggedIn();
+  }
+
+  public getIsLoggedIn(): void {
+    this.localstorageService.userAsync.subscribe((user: UserModel) => {
+      if (user !== undefined && user !== null) {
+        this._isLoggedIn = true;
+      }
+    }, err => console.error(err)
+    );
+  }
+
+  public get isLoggedin(): boolean {
+    return this._isLoggedIn;
   }
 
 

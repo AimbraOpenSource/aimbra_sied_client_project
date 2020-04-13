@@ -8,8 +8,8 @@
     <mat-card-subtitle>Preencha os campos para entrar no sistema</mat-card-subtitle>
   </mat-card-header>
 
+  <form class="form" [formGroup]="loginFormGroup" novalidate autocomplete="off" (ngSubmit)="login()" >
   <mat-card-content>
-    <form class="form" [formGroup]="loginFormGroup" novalidate autocomplete="off">
       <div class="form-group">
         <label>Email</label>
         <input type="email" class="form-control" placeholder="Entre com seu email" [formControl]="emailFormControl">
@@ -18,27 +18,27 @@
         <label>Senha</label>
         <input type="password" class="form-control" placeholder="Entre com sua senha" [formControl]="passwordFormControl">
       </div>
-    </form>
-  </mat-card-content>
+    </mat-card-content>
 
-  <mat-card-actions>
-    <div class="d-flex flex-row justify-content-between">
-      <div class="mt-2">
-        <a href="javascript: void;">Esqueceu sua senha?</a>
+    <mat-card-actions>
+      <div class="d-flex flex-row justify-content-between">
+        <div class="mt-2">
+          <a href="javascript: void;">Esqueceu sua senha?</a>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="login()">Continuar</button>
+        </div>
       </div>
-      <div>
-        <button mat-raised-button color="primary" (click)="login()">Continuar</button>
+    </mat-card-actions>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+      <div class="mt-4 text-center">
+        <a [routerLink]="['/registro']">Ainda não tem cadastro?</a>
       </div>
-    </div>
-  </mat-card-actions>
-
-  <mat-divider></mat-divider>
-
-  <mat-card-actions>
-    <div class="mt-4 text-center">
-      <a [routerLink]="['/registro']">Ainda não tem cadastro?</a>
-    </div>
-  </mat-card-actions>
+    </mat-card-actions>
+  </form>
 
 
 </mat-card>

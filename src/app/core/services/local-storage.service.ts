@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -16,6 +17,11 @@ export class LocalStorageService {
   public get user(): UserModel {
     const user: UserModel = JSON.parse(window.localStorage.getItem('user'));
     return user;
+  }
+
+  public get userAsync(): Observable<UserModel> {
+    const user: UserModel = JSON.parse(window.localStorage.getItem('user'));
+    return of(user);
   }
 
   public set token(value: string) {

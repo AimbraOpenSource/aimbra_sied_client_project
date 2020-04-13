@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './security/auth/auth.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 const routes: Routes = [
@@ -73,7 +74,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ]
 })
 export class AppRoutingModule { }

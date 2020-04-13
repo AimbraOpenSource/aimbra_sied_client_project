@@ -9,21 +9,28 @@ import { UserRole } from 'src/app/core/models/user-role.model';
 })
 export class MenuSidebarComponent implements OnInit {
 
+  role: UserRole;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.role = this.authService.role;
+  }
+
+  private hasAuth(): boolean {
+    return this.role !== undefined && this.role !== null;
   }
 
   isAluno(): boolean {
-    return this.authService.role === UserRole.ALUNO;
+    return this.hasAuth() && this.role === UserRole.ALUNO;
   }
 
   isProfessor(): boolean {
-    return this.authService.role === UserRole.PROFESSOR;
+    return this.hasAuth() && this.role === UserRole.PROFESSOR;
   }
 
   isRoot(): boolean {
-    return this.authService.role === UserRole.ROOT;
+    return this.hasAuth() && this.role === UserRole.ROOT;
   }
 
 }
