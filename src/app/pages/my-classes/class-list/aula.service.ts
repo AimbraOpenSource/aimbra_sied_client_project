@@ -7,12 +7,17 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({providedIn: 'root'})
 export class AulaService {
 
+
   private url = environment.url + '/aulas';
 
   constructor(private http: HttpClient) { }
 
   public findAllByTurmaId(turmaId: number): Observable<AulaModel[]> {
     return this.http.get<AulaModel[]>(`${this.url}/turmas/${turmaId}`);
+  }
+
+  findById(aulaId: number): Observable<AulaModel> {
+    return this.http.get<AulaModel>(`${this.url}/${aulaId}`);
   }
 
 }

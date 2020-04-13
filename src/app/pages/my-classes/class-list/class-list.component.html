@@ -4,7 +4,7 @@
       <h1>Aulas da Turma de {{ turma?.curso?.nome }}</h1>
     </div>
     <div>
-      <button mat-raised-button color="primary" (click)="goToUrl('/minhas-turmas/formulario/modo/cria')">
+      <button mat-raised-button color="primary" [routerLink]="['/minhas-turmas/formulario/modo/cria']" [queryParams]="{ 'turmaId': turma?.id }">
         <mat-icon class="mat-18">add</mat-icon>
         Adicionar nova aula
       </button>
@@ -23,14 +23,14 @@
       <mat-divider class="mb-3"></mat-divider>
       <mat-card-content class="mt-3 pl-4 d-flex flex-row justify-content-between">
         <div>
-          <button mat-stroked-button color="primary" class="mr-3" (click)="goToUrl('/atividades-enviadas', aula.id)" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'right'" matTooltipClass="bg-dark">Atividades enviadas</button>
+          <button mat-stroked-button color="primary" class="mr-3" (click)="goToUrl('/atividades-enviadas', aula.id.toString())" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'below'" matTooltipClass="bg-dark">Atividades enviadas</button>
           <button mat-stroked-button color="accent" disabled>
             <mat-icon class="mat-18">play_arrow</mat-icon>
             Lista de atividades
           </button>
         </div>
         <div>
-          <button mat-icon-button [routerLink]="['/minhas-turmas/formulario/modo/edita', aula.id]" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+          <button mat-icon-button [routerLink]="['/minhas-turmas/formulario/modo/edita', aula.id]" [queryParams]="{ 'turmaId': aula.turma.id }" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
               <mat-icon class="mat-18">edit</mat-icon>
           </button>
           <button mat-icon-button (click)="removeById(aula.id)" color="warn" matTooltip="Remove esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">

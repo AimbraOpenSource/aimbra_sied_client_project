@@ -111,7 +111,7 @@ export class MyClassesComponent implements OnInit {
   }
 
   onRowClick(turma: TurmaModel) {
-    this.goToUrl('/minhas-turmas', turma.id);
+    this.goToUrl('/minhas-turmas', turma.id.toString());
   }
 
   fazerConvite() {
