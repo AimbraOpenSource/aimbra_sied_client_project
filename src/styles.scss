@@ -26,9 +26,9 @@ aside {
 }
 
 
-input.form-control button button.btn .mat-focus-indicator .mat-raised-button .mat-button-base .mat-primary .mat-button-focus-overlay{
+input input.form-control button button.btn .mat-focus-indicator .mat-raised-button .mat-button-base .mat-primary .mat-button-focus-overlay{
   &:focus {
-    box-shadow: unset;
+    box-shadow: unset !important;
   }
 }
 
