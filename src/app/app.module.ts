@@ -20,6 +20,7 @@ import { AuthInterceptor } from './security/auth/auth-interceptor';
 import { RegisterModule } from './pages/register/register.module';
 import { MenuSidebarModule } from './shared/menu-sidebar/menu-sidebar.module';
 import { MatDividerModule } from '@angular/material/divider';
+import {DISQUS_SHORTNAME, DisqusModule} from "ngx-disqus";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MatDividerModule } from '@angular/material/divider';
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
+    DisqusModule.forRoot('disqus_shortname'),
     LoginModule,
     RegisterModule,
     DashboardModule,
@@ -47,6 +49,10 @@ import { MatDividerModule } from '@angular/material/divider';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+      provide: DISQUS_SHORTNAME,
+      useValue: 'sied-1'
     }
   ],
   bootstrap: [AppComponent],

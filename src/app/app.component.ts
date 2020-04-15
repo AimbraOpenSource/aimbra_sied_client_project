@@ -5,6 +5,7 @@ import { AuthService } from './security/auth/auth.service';
 import { Observable, of } from 'rxjs';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { UserModel } from './core/models/user.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
 
   public _isLoggedIn: boolean;
 
-  constructor(private authService: AuthService, private localstorageService: LocalStorageService) {}
+  constructor(private authService: AuthService, private localstorageService: LocalStorageService, private router: Router) {}
 
   ngOnInit(): void {
     this.getIsLoggedIn();

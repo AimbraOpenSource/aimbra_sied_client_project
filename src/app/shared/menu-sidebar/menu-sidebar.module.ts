@@ -6,6 +6,7 @@ import { SubjectsModule } from '../widgets/subjects/subjects.module';
 import { TeacherManagementModule } from '../widgets/teacher-management/teacher-management.module';
 import { UserWidgetModule } from '../widgets/user-widget/user-widget.module';
 import { RootModule } from '../widgets/root/root.module';
+import {RouterModule} from "@angular/router";
 
 
 
@@ -17,7 +18,8 @@ import { RootModule } from '../widgets/root/root.module';
     SubjectsModule,
     TeacherManagementModule,
     UserWidgetModule,
-    RootModule
+    RootModule,
+    RouterModule
   ],
   exports: [MenuSidebarComponent],
 })

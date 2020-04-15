@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventsComponent } from './events.component';
 import { Routes, RouterModule } from '@angular/router';
+import {DisqusCommentModule} from "../../components/disqus-comment/disqus-comment.module";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    DisqusCommentModule
   ],
   exports: [EventsComponent],
 })

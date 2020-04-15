@@ -6,6 +6,7 @@ import { BootstrapAlertModule } from 'src/app/components/alerts/bootstrap-alert/
 import {MaterialCardModule} from "../../components/cards/material-card/material-card.module";
 import {MatButtonModule} from "@angular/material/button";
 import {YoutubeVideoModule} from "../../components/youtube-video/youtube-video.module";
+import {DisqusCommentModule} from "../../components/disqus-comment/disqus-comment.module";
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
     BootstrapAlertModule,
     MatButtonModule,
     MaterialCardModule,
-    YoutubeVideoModule
+    YoutubeVideoModule,
+    DisqusCommentModule
   ],
   exports: [DashboardComponent],
 })
