@@ -8,7 +8,6 @@
 
   <section>
     <app-bootstrap-alert [message]="'This is alert message'" [show]="true" [color]="'danger'"></app-bootstrap-alert>
-    <button class="btn btn-primary">Show Alert</button>
   </section>
 
   <section class="mt-5">
@@ -27,6 +26,7 @@
 </header>
 
 <section>
-  <app-disqus-comment></app-disqus-comment>
+  <button class="btn btn-primary" (click)="showComments = !showComments">Show Comments</button>
+  <app-disqus-comment *ngIf="showComments"></app-disqus-comment>
 </section>
 

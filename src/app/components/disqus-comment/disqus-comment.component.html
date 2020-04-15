@@ -1,9 +1,9 @@
 <p>Identifieer: {{indentifier}}</p>
 <p>url: {{fullPath}}</p>
 
+<!--  [url]="fullPath"-->
 <disqus
   [identifier]="indentifier"
-  [url]="fullPath"
   [category]="category"
   [language]="'pt'"
   (newComment)="onComment($event)"

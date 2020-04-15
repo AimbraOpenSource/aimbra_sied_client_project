@@ -7,7 +7,7 @@ import {Location} from "@angular/common";
   templateUrl: './disqus-comment.component.html',
   styleUrls: ['./disqus-comment.component.scss']
 })
-export class DisqusCommentComponent implements OnInit, AfterViewChecked {
+export class DisqusCommentComponent implements OnInit {
 
   @Input()
   category: string = 'all';
@@ -21,13 +21,12 @@ export class DisqusCommentComponent implements OnInit, AfterViewChecked {
   pathname: string;
   protocol: string;
 
-  constructor(private route: ActivatedRoute, private location: Location, private cdRef: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private location: Location, private cdRef: ChangeDetectorRef) {
+    this.getActivatedRoute();
+  }
 
   ngOnInit(): void {
-  }
-  ngAfterViewChecked(): void {
-    this.getActivatedRoute();
-    this.cdRef.detectChanges();
+
   }
 
   getActivatedRoute() {
