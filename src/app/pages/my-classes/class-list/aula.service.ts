@@ -2,7 +2,7 @@ import { AulaModel } from './../../../core/models/aula.model';
 import { Observable } from 'rxjs';
 import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class AulaService {
@@ -20,4 +20,8 @@ export class AulaService {
     return this.http.get<AulaModel>(`${this.url}/${aulaId}`);
   }
 
+  deleteById(id: number): Observable<any> {
+    const pamameters = new HttpParams().set('aulaId', id.toString());
+    return this.http.delete(`${this.url}`, { params: pamameters })
+  }
 }

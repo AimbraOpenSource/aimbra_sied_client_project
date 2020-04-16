@@ -26,14 +26,14 @@
           <button mat-stroked-button color="primary" class="mr-3" (click)="goToUrl('/atividades-enviadas', aula.id.toString())" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'below'" matTooltipClass="bg-dark">Atividades enviadas</button>
           <button mat-stroked-button color="accent" disabled>
             <mat-icon class="mat-18">play_arrow</mat-icon>
-            Lista de atividades
+            Aula ao vivo
           </button>
         </div>
         <div>
           <button mat-icon-button [routerLink]="['/minhas-turmas/formulario/modo/edita', aula.id]" [queryParams]="{ 'turmaId': aula.turma.id }" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
               <mat-icon class="mat-18">edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="removeById(aula.id)" color="warn" matTooltip="Remove esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+          <button mat-icon-button (click)="remove(aula)" color="warn" matTooltip="Remove esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
               <mat-icon class="mat-18">delete</mat-icon>
           </button>
         </div>

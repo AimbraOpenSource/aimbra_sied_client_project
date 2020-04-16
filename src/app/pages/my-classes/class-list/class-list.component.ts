@@ -1,12 +1,14 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TurmaService } from '../turma.service';
-import { TurmaModel } from 'src/app/core/models/turma.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Location } from '@angular/common';
-import { AulaService } from './aula.service';
-import { AulaModel } from 'src/app/core/models/aula.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TurmaService} from '../turma.service';
+import {TurmaModel} from 'src/app/core/models/turma.model';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Location} from '@angular/common';
+import {AulaService} from './aula.service';
+import {AulaModel} from 'src/app/core/models/aula.model';
+import {MatDialog} from "@angular/material/dialog";
+import {DialogBaseComponent} from "../../../components/dialog-base/dialog-base.component";
 
 @Component({
   selector: 'app-class-list',
@@ -17,6 +19,7 @@ export class ClassListComponent implements OnInit {
 
   turmaId: number;
   aulas: AulaModel[];
+  aula: AulaModel;
   turma: TurmaModel;
 
   constructor(
@@ -25,6 +28,7 @@ export class ClassListComponent implements OnInit {
     private aulaService: AulaService,
     private location: Location,
     private snack: MatSnackBar,
+    private dialog: MatDialog,
     private router: Router
     ) { }
 
@@ -82,8 +86,38 @@ export class ClassListComponent implements OnInit {
     this.router.navigate(['/entregas-da-aula', param]);
   }
 
-  removeById(aulaId: number) {
-    console.log('remove aula ' + aulaId);
+  remove(aula: AulaModel) {
+    this.dialog.open(DialogBaseComponent, {
+      width: '500px',
+      id: aula.id.toString(),
+      data: {
+        title: 'Atenção!',
+        message: 'Você deseja realmente remover esta Aula?',
+        label: 'Digite SIM par confirmar',
+        buttonCancel: true
+      }
+    }).afterClosed().subscribe((result: string) => {
+      if (result === 'SIM') {
+        this.aula = aula;
+        this.removeBydId();
+      }
+    });
+  }
+
+  private removeBydId() {
+    this.aulaService.deleteById(this.aula.id).subscribe((resp) => {
+      if (resp) {
+        this.snack.open('Removido com sucesso', 'Ok', {
+          duration: 6000,
+          panelClass: 'bg-sucess'
+        })
+      }
+    }, (err: HttpErrorResponse) => {
+      this.snack.open('Erro ao remover no servidor com o codigo ' + err.status, 'Ok', {
+        duration: 6000,
+        panelClass: 'bg-danger'
+      })
+    })
   }
 
 }
