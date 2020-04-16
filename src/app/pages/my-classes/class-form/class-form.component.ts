@@ -46,12 +46,22 @@ export class ClassFormComponent implements OnInit {
     this.getQueryParams();
   }
 
+  /**
+   * Capturar esses valores nos formularios
+   */
+  private setPatternValues() {
+    this.atividade.aula.reuniao.duracao = '60';
+  }
+
   publish() {
     if (!this.isEditMode) {
-      this.atividadeService.insert(this.atividade).subscribe((atividade: AtividadeModel) => {
-        this.atividade = atividade;
+      this.atividadeService.insert(this.atividade).subscribe((a: AtividadeModel) => {
+        this.atividade = a;
+        this.snack.open('Aula Criada com sucesso', 'BLZ! :)', { duration: 5000, panelClass: 'bg-success' }).afterOpened().subscribe(() => {
+          this.location.back();
+        });
       }, (err: HttpErrorResponse) => {
-        this.snack.open(err.error.message, null, { duration: 5000 }).afterOpened().subscribe(() => {
+        this.snack.open(err.error.message, null, { duration: 5000, panelClass: 'bg-danger' }).afterOpened().subscribe(() => {
           this.location.back();
         });
       });
