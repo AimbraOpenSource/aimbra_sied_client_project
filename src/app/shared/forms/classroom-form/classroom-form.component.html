@@ -2,11 +2,14 @@
 <p>Preencha no campo abaixo o nome da nova turma</p>
 
 <div mat-dialog-content>
-    <label>Nome do curso</label>
-    <input class="form-control w-100" [(ngModel)]="curso.nome">
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Entre com seu email</mat-label>
+    <input matInput [(ngModel)]="curso.nome" type="text" cdkFocusInitial>
+  </mat-form-field>
 
 </div>
 <div mat-dialog-actions class="text-right mt-2 mb-3">
-  <button mat-button (click)="dialogRef.close()">Cancelar</button>
-  <button mat-button color="primary" [mat-dialog-close]="curso" cdkFocusInitial>Salvar</button>
+  <button mat-stroked-button (click)="dialogRef.close()">Cancelar</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="curso">Salvar</button>
 </div>

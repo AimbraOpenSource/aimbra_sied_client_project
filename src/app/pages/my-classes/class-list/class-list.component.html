@@ -45,9 +45,12 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>Alunos</mat-card-title>
-            <!-- <mat-card-subtitle>Crie ações</mat-card-subtitle> -->
         </mat-card-header>
         <mat-card-content>
+          <button mat-flat-button color="accent" class="w-100 d-flex flex-row justify-content-between bg-info" (click)="copyToClipboard()">
+            <mat-icon class="mat-18 mr-2">file_copy</mat-icon>
+            convidar um aluno
+          </button>
             <mat-list>
               <mat-list-item *ngFor="let aluno of turma?.alunos">
                 <div mat-line>{{aluno?.nome}}</div>

@@ -9,6 +9,7 @@ import {AulaService} from './aula.service';
 import {AulaModel} from 'src/app/core/models/aula.model';
 import {MatDialog} from "@angular/material/dialog";
 import {DialogBaseComponent} from "../../../components/dialog-base/dialog-base.component";
+import {Clipboard} from "@angular/cdk/clipboard";
 
 @Component({
   selector: 'app-class-list',
@@ -29,7 +30,8 @@ export class ClassListComponent implements OnInit {
     private location: Location,
     private snack: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private clipboard: Clipboard
     ) { }
 
   ngOnInit(): void {
@@ -74,16 +76,16 @@ export class ClassListComponent implements OnInit {
     });
   }
 
-  goToUrl(path?: string, param?: string) {
+  async goToUrl(path?: string, param?: string) {
     console.log(path, param);
     if (path) {
       if (param) {
-        this.router.navigate([path, param]);
+        await this.router.navigate([path, param]);
       }
-      this.router.navigate([path]);
+      await this.router.navigate([path]);
       return;
     }
-    this.router.navigate(['/entregas-da-aula', param]);
+    await this.router.navigate(['/entregas-da-aula', param]);
   }
 
   remove(aula: AulaModel) {
@@ -118,6 +120,17 @@ export class ClassListComponent implements OnInit {
         panelClass: 'bg-danger'
       })
     })
+  }
+
+  copyToClipboard() {
+    const link = `localhost:4200/#/disciplinas/${this.turma.uuid}/confirma-convite`;
+    this.clipboard.copy(link);
+    this.snack.open(`O link "${link}" de convite foi copiado para a área de transferência`, 'Ok', {
+      duration: 8000,
+      panelClass: 'primary',
+      verticalPosition: 'top',
+      horizontalPosition: 'right'
+    });
   }
 
 }

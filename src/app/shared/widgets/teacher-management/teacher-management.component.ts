@@ -13,8 +13,8 @@ export class TeacherManagementComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToUrl(path: string) {
-    this.router.navigate([path]);
+  async goToUrl(path: string) {
+    await this.router.navigate([path]);
   }
 
 

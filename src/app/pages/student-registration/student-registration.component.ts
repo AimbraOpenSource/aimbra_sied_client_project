@@ -10,6 +10,8 @@ import { UserModel } from 'src/app/core/models/user.model';
 import { UserRole } from 'src/app/core/models/user-role.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {LocalStorageService} from "../../core/services/local-storage.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-student-registration',
@@ -32,11 +34,17 @@ export class StudentRegistrationComponent implements OnInit {
     private turmaService: TurmaService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private localStorageService: LocalStorageService,
+    private location: Location,
     ) { }
 
   ngOnInit(): void {
     this.getParams();
+    this.initFormPin();
+  }
+
+  initFormPin() {
     this.pinForm = this.fb.group({
       dig1: '',
       dig2: '',
@@ -48,18 +56,40 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   getParams() {
-    this.route.paramMap.subscribe((params) => {
-      this.getUser();
-      if (this.user.role === UserRole.PROFESSOR) {
-        this.snack.open('Professor não pode se matricular. Sinto muito!', null, {
-          duration: 6000,
-          panelClass: 'primary'
-        });
-        this.router.navigate(['/']);
-      }
+    this.route.paramMap.subscribe(async (params) => {
       this.uuid = params.get('uuid');
+      this.getUser();
+      this.isProfesor();
+      await this.isAlreadyJoined();
       this.findByUuid();
     });
+  }
+
+  isProfesor() {
+    if (this.user.role === UserRole.PROFESSOR) {
+      this.snack.open(
+        'Professor não pode se matricular. Sinto muito!', null, {
+          duration: 6000,
+          panelClass: ['bg-danger'],
+          verticalPosition: 'top'
+        }).afterOpened().subscribe(async () => {
+        await this.router.navigate(['/']);
+      })
+    }
+  }
+
+  async isAlreadyJoined(): Promise<boolean> {
+    const turmas = this.localStorageService.turmas.filter(t => t.uuid === this.uuid);
+    if (turmas.length > 0) {
+      this.snack.open(
+        'Você já se matriculou nesta turma', 'OK :)', {
+          duration: 6000,
+          panelClass: ['bg-danger'],
+          verticalPosition: 'top'
+        });
+      this.location.back();
+    }
+    return turmas.length > 0;
   }
 
   findByUuid() {

@@ -34,7 +34,7 @@ export class TurmaService {
   }
 
   studentRegistration(key: string, uuidTurma: string): Observable<any> {
-    return this.http.get(this.url + '/aluno/' + uuidTurma, { params : { senha: key }});
+    return this.http.get(this.url + `${uuidTurma}/aluno/`, { params : { senha: key }});
   }
 
   findAllByStudentLoggedIn(): Observable<TurmaModel[]> {

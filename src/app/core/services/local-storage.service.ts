@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
 import { Observable, of } from 'rxjs';
+import {TurmaModel} from "../models/turma.model";
 
 
 @Injectable({
@@ -9,6 +10,15 @@ import { Observable, of } from 'rxjs';
 export class LocalStorageService {
 
   constructor() { }
+
+  public set turmas (turmas: TurmaModel[]) {
+    window.localStorage.setItem('turmas', JSON.stringify(turmas));
+  }
+
+  public get turmas(): TurmaModel[] {
+    const turmas: TurmaModel[] = JSON.parse(window.localStorage.getItem('turmas'));
+    return turmas;
+  }
 
   public set user(user: UserModel) {
     window.localStorage.setItem('user', JSON.stringify(user));
