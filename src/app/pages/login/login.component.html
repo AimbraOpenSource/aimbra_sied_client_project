@@ -11,8 +11,8 @@
   <form class="form" [formGroup]="loginFormGroup" novalidate autocomplete="off" (ngSubmit)="login()" >
   <mat-card-content>
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Entre com seu email</mat-label>
-        <input matInput [formControl]="emailFormControl" type="email">
+        <mat-label>Entre com seu nome de usuário ou email</mat-label>
+        <input matInput [formControl]="emailFormControl" type="text">
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Entre com sua senha</mat-label>
