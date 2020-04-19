@@ -7,12 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 
 const routes: Routes = [
   {
-    path: '/',
-    redirectTo: '/users',
-    pathMatch: 'full'
-  },
-  {
-    path: 'users',
+    path: '',
     component: UsersComponent
   }
 ];

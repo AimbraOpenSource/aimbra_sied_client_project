@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
   user: UserModel;
 
   emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
+    Validators.required
   ]);
   emailMatcher = new MyErrorStateMatcher();
 

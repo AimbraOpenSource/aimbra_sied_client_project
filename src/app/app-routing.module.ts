@@ -67,8 +67,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'zoom',
+    path: 'zoom/users',
     loadChildren: () => import('./pages/zoom/users/users.module').then(m => m.UsersModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'zoom/configuration',
+    loadChildren: () => import('./pages/zoom/zoom-configuration/zoom-configuration.module').then(m => m.ZoomConfigurationModule),
     canActivate: [AuthGuard]
   },
 ];
