@@ -3,7 +3,7 @@ export class ReuniaoModel {
   topico: string;
   descricao: string;
   duracao: string;
-  dataHoraInicio: Date;
+  dataHoraInicio: string;
   fusoHorario: string;
   senha: string;
   videoAnfitriaoAtivado: boolean;

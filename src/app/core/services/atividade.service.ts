@@ -26,8 +26,13 @@ export class AtividadeService {
     return this.http.get<AtividadeModel>(this.url + `/aulas/${aulaId}`);
   }
 
-  public insert(atividade: AtividadeModel): Observable<AtividadeModel> {
-    return this.http.post<AtividadeModel>(this.url, atividade);
+  public insert(atividade: AtividadeModel, files: Set<File>): Observable<AtividadeModel> {
+    const formData = new FormData();
+    if (files && files.size > 0) {
+      files.forEach((f: File) => formData.append('files', f));
+    }
+    formData.append('atividade', JSON.stringify(atividade));
+    return this.http.post<AtividadeModel>(this.url, formData);
   }
 
 }

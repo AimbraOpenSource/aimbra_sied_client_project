@@ -7,6 +7,7 @@ export interface DialogData {
   label: string;
   value: string;
   buttonCancel: boolean;
+  withoutConfirmationText: boolean;
 }
 
 @Component({

@@ -16,3 +16,10 @@
 textarea {
   min-height: 100px;
 }
+
+.mat-icon-clicked {
+  &:hover {
+    color: darkred;
+    cursor: pointer;
+  }
+}
