@@ -7,6 +7,9 @@ import {UserModel} from "../../core/models/user.model";
 import {UserRole} from "../../core/models/user-role.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Location} from "@angular/common";
+import {AulaService} from "../my-classes/class-list/aula.service";
+import {AulaModel} from "../../core/models/aula.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-subject-details',
@@ -17,11 +20,13 @@ export class SubjectDetailsComponent implements OnInit {
 
   uuid: string;
   turma: TurmaModel;
+  aulas: AulaModel[];
   userLoggedin: UserModel;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private aulaService: AulaService,
     private turmaService: TurmaService,
     private localStorageService: LocalStorageService,
     private snack: MatSnackBar,
@@ -44,6 +49,15 @@ export class SubjectDetailsComponent implements OnInit {
     });
   }
 
+  findAulasByTurmaId() {
+    this.aulaService.findAllByTurmaId(this.turma.id).subscribe((aulas: AulaModel[]) => {
+      this.aulas = aulas;
+      console.log(this.aulas);
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
+    } );
+  }
+
   isAlreadyJoined() {
     const turmas = this.localStorageService.turmas.filter(t => t.uuid === this.uuid);
     if (!(turmas.length > 0)) {
@@ -58,19 +72,17 @@ export class SubjectDetailsComponent implements OnInit {
   }
 
   async findTurmaByUuid() {
-    console.log('findTurmaByUuid');
     await this.turmaService.findByUuid(this.uuid).subscribe((turma: TurmaModel) => {
       this.turma = turma;
+      this.findAulasByTurmaId();
     });
   }
 
   findUserLoggedin() {
-    console.log('findUserLoggedin');
     this.userLoggedin= this.localStorageService.user;
   }
 
   isProfessor() {
-    console.log('isProfessor');
     if (this.userLoggedin.role === UserRole.PROFESSOR) {
       this.snack.open('Professor só pode gerenciar disciplina', 'Ok!', {
         duration: 6000,

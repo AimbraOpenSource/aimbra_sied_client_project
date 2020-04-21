@@ -12,6 +12,10 @@ export class AulaService {
 
   constructor(private http: HttpClient) { }
 
+  public findAllByTurmaIdOfProfessor(turmaId: number): Observable<AulaModel[]> {
+    return this.http.get<AulaModel[]>(`${this.url}/professores/turmas/${turmaId}`);
+  }
+
   public findAllByTurmaId(turmaId: number): Observable<AulaModel[]> {
     return this.http.get<AulaModel[]>(`${this.url}/turmas/${turmaId}`);
   }

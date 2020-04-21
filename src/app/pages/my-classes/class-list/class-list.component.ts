@@ -46,7 +46,7 @@ export class ClassListComponent implements OnInit {
   }
 
   findAllByTurmaId() {
-    this.aulaService.findAllByTurmaId(this.turmaId).subscribe((aulas: AulaModel[]) => {
+    this.aulaService.findAllByTurmaIdOfProfessor(this.turmaId).subscribe((aulas: AulaModel[]) => {
       this.aulas = aulas;
       console.log(this.aulas);
     }, (err: HttpErrorResponse) => {

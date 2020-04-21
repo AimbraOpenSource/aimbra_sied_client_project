@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Location} from "@angular/common";
 import {InscricaoService} from "../../core/services/inscricao.service";
+import {AulaService} from "../my-classes/class-list/aula.service";
+import {AulaModel} from "../../core/models/aula.model";
 
 @Component({
   selector: 'app-student-registration',
@@ -93,6 +95,10 @@ export class StudentRegistrationComponent implements OnInit {
     }
     return turmas.length > 0;
   }
+
+
+
+
 
   findByUuid() {
     this.turmaService.findByUuid(this.uuid).subscribe((turma: TurmaModel) => {
