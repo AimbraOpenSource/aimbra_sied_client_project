@@ -89,8 +89,12 @@ export class SubjectDetailsComponent implements OnInit {
         verticalPosition: 'top'
       }).afterOpened().subscribe(async () => {
         this.location.back();
-      })
+      });
     }
+  }
+
+  goToUrl(aulaId: number) {
+    this.router.navigate(['sala-de-aula', aulaId]);
   }
 
 }

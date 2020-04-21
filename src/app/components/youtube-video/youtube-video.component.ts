@@ -19,6 +19,12 @@ export class YoutubeVideoComponent implements OnInit {
   @Input()
   suggestedQuality: number;
 
+  @Input()
+  set videoUrl(fullUrl: string) {
+
+    this.videoId = fullUrl;
+  }
+
   ngOnInit(): void {
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";

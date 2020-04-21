@@ -10,10 +10,13 @@ import {Location} from "@angular/common";
 export class DisqusCommentComponent implements OnInit {
 
   @Input()
-  category: string = 'all';
+  category = 'all';
 
   @Input()
   pageId: number;
+
+  @Input()
+  debugMode = false;
 
   url: string;
   host: string;
@@ -45,8 +48,9 @@ export class DisqusCommentComponent implements OnInit {
     });
   }
 
-  get indentifier(): string {
-    return this.pageId ? `${this.url}/${this.pageId}` : this.url;
+  get id(): string {
+    // return this.pageId ? `${this.url}` : this.url;
+    return '/sala-de-aula/' + this.pageId;
   }
 
   get fullPath(): string {

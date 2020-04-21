@@ -1,0 +1,13 @@
+<div>
+  <div class="list-group" *ngIf="recursos?.length > 0">
+    <div href="#" class="list-group-item list-group-item-action d-flex flex-row justify-content-between"
+      *ngFor="let r of recursos">
+      <div class="d-flex flex-row justify-content-between">
+        <div><mat-icon class="mat-icon-clicked">attachment</mat-icon></div>
+        <div class="mt-1 ml-2" (click)="download(r)">
+          {{ r.nomeReal }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

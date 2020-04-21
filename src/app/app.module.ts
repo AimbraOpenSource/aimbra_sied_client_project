@@ -31,7 +31,7 @@ import {DISQUS_SHORTNAME, DisqusModule} from 'ngx-disqus';
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
-    DisqusModule.forRoot('disqus_shortname'),
+    DisqusModule.forRoot('aimbrasied'),
     LoginModule,
     RegisterModule,
     DashboardModule,
@@ -52,7 +52,7 @@ import {DISQUS_SHORTNAME, DisqusModule} from 'ngx-disqus';
     },
     {
       provide: DISQUS_SHORTNAME,
-      useValue: 'sied-1'
+      useValue: 'aimbrasied'
     }
   ],
   bootstrap: [AppComponent],

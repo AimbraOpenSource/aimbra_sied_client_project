@@ -1,12 +1,12 @@
-<p>Identifieer: {{indentifier}}</p>
-<p>url: {{fullPath}}</p>
+
+<div *ngIf="debugMode" >
+  <p>Identifieer: {{id}}</p>
+  <p>url: {{fullPath}}</p>
+  <p>pageId: {{pageId}}</p>
+</div>
 
 <!--  [url]="fullPath"-->
 <disqus
-  [identifier]="indentifier"
-  [category]="category"
-  [language]="'pt'"
-  (newComment)="onComment($event)"
-  (ready)="onReady($event)"
-  (paginate)="onPaginate($event)"
+  [identifier]="id"
+
 ></disqus>
