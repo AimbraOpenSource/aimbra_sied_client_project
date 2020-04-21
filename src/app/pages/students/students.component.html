@@ -1,3 +1,15 @@
 <header>
   <h1>Meus alunos</h1>
 </header>
+
+<div *ngFor="let a of alunos" class="mt-3">
+  <app-material-card [title]="a.nome" [hasDividerBotton]="true">
+    <div body class="text-sm text-muted">
+      <p>Este aluno esta matriculado na turma <strong>{{ a.curso }}</strong></p>
+    </div>
+    <div action>
+      <button mat-stroked-button color="accent">Bloquear</button>
+      <button mat-button color="primary">Remover</button>
+    </div>
+  </app-material-card>
+</div>
