@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Location} from "@angular/common";
+import {InscricaoService} from "../../core/services/inscricao.service";
 
 @Component({
   selector: 'app-student-registration',
@@ -32,6 +33,7 @@ export class StudentRegistrationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private turmaService: TurmaService,
+    private inscricaoService: InscricaoService,
     private authService: AuthService,
     private dialog: MatDialog,
     private snack: MatSnackBar,
@@ -127,7 +129,7 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   goToRegistration(key: string) {
-    this.turmaService.studentRegistration(key, this.uuid).subscribe((resp: TurmaModel) => {
+    this.inscricaoService.insertAluno(this.uuid, key).subscribe((resp: TurmaModel) => {
       this.snack.open('Você foi matriculado', null, {
         duration: 6000
       }).afterOpened().subscribe(() => {

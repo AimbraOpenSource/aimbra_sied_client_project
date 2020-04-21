@@ -1,6 +1,6 @@
 import {TurmaModel} from 'src/app/core/models/turma.model';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TurmaService} from '../my-classes/turma.service';
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {UserModel} from "../../core/models/user.model";
@@ -21,6 +21,7 @@ export class SubjectDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private turmaService: TurmaService,
     private localStorageService: LocalStorageService,
     private snack: MatSnackBar,
@@ -29,6 +30,7 @@ export class SubjectDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.findParam();
+
   }
 
   findParam() {
@@ -38,7 +40,21 @@ export class SubjectDetailsComponent implements OnInit {
       await this.findTurmaByUuid();
       this.findUserLoggedin();
       this.isProfessor();
+      this.isAlreadyJoined();
     });
+  }
+
+  isAlreadyJoined() {
+    const turmas = this.localStorageService.turmas.filter(t => t.uuid === this.uuid);
+    if (!(turmas.length > 0)) {
+      this.snack.open(
+        'Você precisa se matricular nesta turma', 'OK :)', {
+          duration: 6000,
+          panelClass: ['bg-danger'],
+          verticalPosition: 'top'
+        });
+      this.router.navigate(['disciplinas', this.uuid, 'confirma-convite']);
+    }
   }
 
   async findTurmaByUuid() {
