@@ -8,8 +8,8 @@
       <p>Este aluno esta matriculado na turma <strong>{{ a.curso }}</strong></p>
     </div>
     <div action>
-      <button mat-stroked-button color="accent">Bloquear</button>
-      <button mat-button color="primary">Remover</button>
+      <button mat-stroked-button color="accent" [matTooltip]="'Recurso sera adicionando na próxima versão'" disabled>Bloquear</button>
+      <button mat-button color="accent" (click)="remove(a)">Remover</button>
     </div>
   </app-material-card>
 </div>

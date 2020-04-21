@@ -11,8 +11,8 @@
   </div>
 </div>
 <div mat-dialog-actions class="mb-1">
-  <button mat-stroked-button (click)="onNoClick()" *ngIf="data?.buttonCancel === true">No, Obrigado!</button>
-  <div *ngIf="data?.withoutConfirmationText && data?.withoutConfirmationText === false">
+  <button mat-stroked-button (click)="onNoClick()" class="mr-1" *ngIf="data?.buttonCancel === true">No, Obrigado!</button>
+  <div *ngIf="data?.withoutConfirmationText === false">
     <button mat-flat-button color="accent" [mat-dialog-close]="data.value" [disabled]="data.value !== 'SIM'">Estou certo disso!</button>
   </div>
   <div *ngIf="data?.withoutConfirmationText === true">

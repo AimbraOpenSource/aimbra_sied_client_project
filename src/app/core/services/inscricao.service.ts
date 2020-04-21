@@ -23,4 +23,12 @@ export class InscricaoService {
     return this.http.get<TurmaModel>(`${this.url}/turmas/${uuid}`, { params: reqParams });
   }
 
+  removeByAlunoIdAndTurmaId(alunoId: number, turmaId: number): Observable<any> {
+    return this.http.delete(`${this.url}`, {
+      params: new HttpParams()
+        .set('alunoId', alunoId.toString())
+        .set('turmaId', turmaId.toString())
+    });
+  }
+
 }

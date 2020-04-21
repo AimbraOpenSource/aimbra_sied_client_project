@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlunoModel } from '../models/aluno.model';
 import { AlunoOfProfessor } from 'src/app/domain/aluno/aluno-of-professor.model';

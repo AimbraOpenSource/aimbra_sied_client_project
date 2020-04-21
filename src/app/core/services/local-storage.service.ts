@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
 import { Observable, of } from 'rxjs';
-import {TurmaModel} from "../models/turma.model";
+import {TurmaModel} from '../models/turma.model';
 
 
 @Injectable({
@@ -16,7 +16,10 @@ export class LocalStorageService {
   }
 
   public get turmas(): TurmaModel[] {
-    const turmas: TurmaModel[] = JSON.parse(window.localStorage.getItem('turmas'));
+    let turmas: TurmaModel[] = [];
+    if (window.localStorage.getItem('turmas')) {
+      turmas = JSON.parse(window.localStorage.getItem('turmas'));
+    }
     return turmas;
   }
 

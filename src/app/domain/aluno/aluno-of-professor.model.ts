@@ -5,4 +5,5 @@ export interface AlunoOfProfessor {
   nome: string;
   curso: string;
   professor: string;
+  turmaId: number;
 }

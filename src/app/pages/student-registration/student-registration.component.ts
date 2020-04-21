@@ -129,7 +129,7 @@ export class StudentRegistrationComponent implements OnInit {
           title: 'Atenção',
           message: 'É preciso ser um aluno para se patricular',
           buttonCancel: false
-        }
+        },
       });
     }
   }
@@ -143,7 +143,7 @@ export class StudentRegistrationComponent implements OnInit {
       });
     }, (err: HttpErrorResponse) => {
         this.snack.open('Erro!!!', null, {
-          duration: 6000
+          duration: 3000
         });
     });
   }
