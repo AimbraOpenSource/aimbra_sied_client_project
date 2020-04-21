@@ -10,11 +10,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DialogBaseModule } from 'src/app/components/dialog-base/dialog-base.module';
 import { ClassListModule } from './class-list/class-list.module';
 import { ClassFormModule } from './class-form/class-form.module';
+import { AuthRoleProfessorGuard } from 'src/app/security/auth/auth-role.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyClassesComponent
+    component: MyClassesComponent,
+    canActivate: [ AuthRoleProfessorGuard ]
   },
   {
     path: 'formulario',

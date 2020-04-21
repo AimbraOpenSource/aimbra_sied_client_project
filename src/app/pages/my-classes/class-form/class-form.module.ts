@@ -14,15 +14,18 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import { AuthRoleProfessorGuard } from 'src/app/security/auth/auth-role.guard';
 
 const routes: Routes = [
   {
     path: 'modo/cria',
-    component: ClassFormComponent
+    component: ClassFormComponent,
+    canActivate: [ AuthRoleProfessorGuard]
   },
   {
     path: 'modo/edita/:aulaId',
-    component: ClassFormComponent
+    component: ClassFormComponent,
+    canActivate: [AuthRoleProfessorGuard]
   }
 ];
 

@@ -3,7 +3,7 @@ import { AlunoService } from 'src/app/core/services/aluno.service';
 import { AlunoModel } from 'src/app/core/models/aluno.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AlunoOfProfessor } from 'src/app/domain/aluno/aluno-of-professor.model';
+import { AlunoOfProfessor } from 'src/app/core/models/aluno-of-professor.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBaseComponent } from 'src/app/components/dialog-base/dialog-base.component';
 import { InscricaoService } from 'src/app/core/services/inscricao.service';

@@ -20,7 +20,7 @@ import { AuthInterceptor } from './security/auth/auth-interceptor';
 import { RegisterModule } from './pages/register/register.module';
 import { MenuSidebarModule } from './shared/menu-sidebar/menu-sidebar.module';
 import { MatDividerModule } from '@angular/material/divider';
-import {DISQUS_SHORTNAME, DisqusModule} from "ngx-disqus";
+import {DISQUS_SHORTNAME, DisqusModule} from 'ngx-disqus';
 
 
 @NgModule({

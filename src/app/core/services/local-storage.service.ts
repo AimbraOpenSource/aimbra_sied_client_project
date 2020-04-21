@@ -16,7 +16,7 @@ export class LocalStorageService {
   }
 
   public get turmas(): TurmaModel[] {
-    let turmas: TurmaModel[] = [];
+    let turmas: TurmaModel[] = null;
     if (window.localStorage.getItem('turmas')) {
       turmas = JSON.parse(window.localStorage.getItem('turmas'));
     }

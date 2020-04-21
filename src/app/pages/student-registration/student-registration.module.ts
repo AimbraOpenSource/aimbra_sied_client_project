@@ -7,9 +7,10 @@ import { StudentRegistrationComponent } from './student-registration.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DialogBaseModule } from 'src/app/components/dialog-base/dialog-base.module';
+import { AuthRoleAlunoGuard } from 'src/app/security/auth/auth-role.guard';
 
 const routes: Routes = [
-  { path: '', component: StudentRegistrationComponent }
+  { path: '', component: StudentRegistrationComponent, canActivate: [ AuthRoleAlunoGuard] }
 ];
 
 @NgModule({

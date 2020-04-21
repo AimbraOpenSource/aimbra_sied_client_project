@@ -10,11 +10,9 @@ import { UserModel } from 'src/app/core/models/user.model';
 import { UserRole } from 'src/app/core/models/user-role.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {LocalStorageService} from "../../core/services/local-storage.service";
-import {Location} from "@angular/common";
-import {InscricaoService} from "../../core/services/inscricao.service";
-import {AulaService} from "../my-classes/class-list/aula.service";
-import {AulaModel} from "../../core/models/aula.model";
+import { LocalStorageService } from '../../core/services/local-storage.service';
+import { Location } from '@angular/common';
+import { InscricaoService } from '../../core/services/inscricao.service';
 
 @Component({
   selector: 'app-student-registration',
@@ -37,11 +35,10 @@ export class StudentRegistrationComponent implements OnInit {
     private turmaService: TurmaService,
     private inscricaoService: InscricaoService,
     private authService: AuthService,
-    private dialog: MatDialog,
     private snack: MatSnackBar,
     private localStorageService: LocalStorageService,
     private location: Location,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getParams();
@@ -63,42 +60,25 @@ export class StudentRegistrationComponent implements OnInit {
     this.route.paramMap.subscribe(async (params) => {
       this.uuid = params.get('uuid');
       this.getUser();
-      this.isProfesor();
       await this.isAlreadyJoined();
       this.findByUuid();
     });
   }
 
-  isProfesor() {
-    if (this.user.role === UserRole.PROFESSOR) {
-      this.snack.open(
-        'Professor não pode se matricular. Sinto muito!', null, {
-          duration: 6000,
-          panelClass: ['bg-danger'],
-          verticalPosition: 'top'
-        }).afterOpened().subscribe(async () => {
-        await this.router.navigate(['/']);
-      })
-    }
-  }
 
   async isAlreadyJoined(): Promise<boolean> {
     const turmas = this.localStorageService.turmas.filter(t => t.uuid === this.uuid);
     if (turmas.length > 0) {
       this.snack.open(
         'Você já se matriculou nesta turma', 'OK :)', {
-          duration: 6000,
-          panelClass: ['bg-danger'],
-          verticalPosition: 'top'
-        });
+        duration: 6000,
+        panelClass: ['bg-danger'],
+        verticalPosition: 'top'
+      });
       this.location.back();
     }
     return turmas.length > 0;
   }
-
-
-
-
 
   findByUuid() {
     this.turmaService.findByUuid(this.uuid).subscribe((turma: TurmaModel) => {
@@ -121,17 +101,7 @@ export class StudentRegistrationComponent implements OnInit {
     this.getKeys().forEach((k) => {
       key += this.pinForm.value[k];
     });
-    if (this.user.role === UserRole.ALUNO) {
-      this.goToRegistration(key);
-    } else {
-      this.dialog.open(DialogBaseComponent, {
-        data: {
-          title: 'Atenção',
-          message: 'É preciso ser um aluno para se patricular',
-          buttonCancel: false
-        },
-      });
-    }
+    this.goToRegistration(key);
   }
 
   goToRegistration(key: string) {
@@ -142,9 +112,9 @@ export class StudentRegistrationComponent implements OnInit {
         this.router.navigate(['/disciplinas', this.uuid]);
       });
     }, (err: HttpErrorResponse) => {
-        this.snack.open('Erro!!!', null, {
-          duration: 3000
-        });
+      this.snack.open('Erro!!!', null, {
+        duration: 3000
+      });
     });
   }
 

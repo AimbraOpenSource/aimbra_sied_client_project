@@ -10,11 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MaterialCardModule } from 'src/app/components/cards/material-card/material-card.module';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AuthRoleProfessorGuard } from 'src/app/security/auth/auth-role.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: StudentsComponent,
+    canActivate: [ AuthRoleProfessorGuard ]
   },
 ];
 

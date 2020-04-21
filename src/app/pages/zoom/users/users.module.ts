@@ -4,11 +4,13 @@ import { UsersComponent } from './users.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MatTableModule } from '@angular/material/table';
+import { AuthRoleProfessorGuard } from 'src/app/security/auth/auth-role.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: UsersComponent
+    component: UsersComponent,
+    canActivate: [AuthRoleProfessorGuard]
   }
 ];
 

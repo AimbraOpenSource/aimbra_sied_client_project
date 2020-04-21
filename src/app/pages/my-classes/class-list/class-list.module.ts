@@ -11,11 +11,13 @@ import { MatDivider, MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AuthRoleProfessorGuard } from 'src/app/security/auth/auth-role.guard';
 
 const routes: Routes = [
   {
     path: ':idTurma',
-    component: ClassListComponent
+    component: ClassListComponent,
+    canActivate: [AuthRoleProfessorGuard]
   }
 ];
 

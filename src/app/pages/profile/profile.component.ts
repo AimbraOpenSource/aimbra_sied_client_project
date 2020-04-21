@@ -1,5 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProfessorService } from 'src/app/domain/professor/professor.service';
+import { ProfessorService } from 'src/app/core/services/professor.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/security/auth/auth.service';

@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlunoModel } from '../models/aluno.model';
-import { AlunoOfProfessor } from 'src/app/domain/aluno/aluno-of-professor.model';
+import { AlunoOfProfessor } from 'src/app/core/models/aluno-of-professor.model';
 
 @Injectable({
   providedIn: 'root'
