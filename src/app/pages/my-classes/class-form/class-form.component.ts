@@ -147,6 +147,8 @@ export class ClassFormComponent implements OnInit {
 
   toogleFileName(r: RecursoModel) {
     this.dialog.open(DialogBaseComponent, {
+      hasBackdrop: true,
+      backdropClass: 'main-backdrop',
       data: {
         title: 'Escolha o nome do arquivo',
         message: 'Digite um nome para seu arquivo',

@@ -2,14 +2,14 @@ import {TurmaModel} from 'src/app/core/models/turma.model';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TurmaService} from '../my-classes/turma.service';
-import {LocalStorageService} from "../../core/services/local-storage.service";
-import {UserModel} from "../../core/models/user.model";
-import {UserRole} from "../../core/models/user-role.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Location} from "@angular/common";
-import {AulaService} from "../my-classes/class-list/aula.service";
-import {AulaModel} from "../../core/models/aula.model";
-import {HttpErrorResponse} from "@angular/common/http";
+import {LocalStorageService} from '../../core/services/local-storage.service';
+import {UserModel} from '../../core/models/user.model';
+import {UserRole} from '../../core/models/user-role.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Location} from '@angular/common';
+import {AulaService} from '../../core/services/aula.service';
+import {AulaModel} from '../../core/models/aula.model';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-subject-details',

@@ -1,0 +1,40 @@
+<header>
+  <h1>Lista de atividades enviadas da aula {{ aulaId }}</h1>
+
+
+
+  <table mat-table [dataSource]="respostas" class="mat-elevation-z8 w-100" *ngIf="respostas.length > 0" >
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="enviadoEm">
+      <th mat-header-cell *matHeaderCellDef> Enviado em </th>
+      <td mat-cell *matCellDef="let element"> {{element.atualizadoEm | date : 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Aluno">
+      <th mat-header-cell *matHeaderCellDef> Aluno </th>
+      <td mat-cell *matCellDef="let element"> {{element.aluno.nome}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="descricao">
+      <th mat-header-cell *matHeaderCellDef class="w-50"> Descrição </th>
+      <td mat-cell *matCellDef="let element"> {{element.descricao | slice: 0: seeMore ? 80 : -1 }} <a href="javascript: void;" (click)="seeMoreDetails(element.descricao)">Abrir detalhes</a> </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Download">
+      <th mat-header-cell *matHeaderCellDef class="text-right"> Download </th>
+      <td mat-cell *matCellDef="let element" class="text-right">
+        <mat-icon (click)="download(element.caminho)">cloud_download</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</header>

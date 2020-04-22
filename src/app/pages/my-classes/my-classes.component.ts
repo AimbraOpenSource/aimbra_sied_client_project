@@ -46,6 +46,8 @@ export class MyClassesComponent implements OnInit {
   openDialog() {
     this.dialog.open(ClassroomFormComponent, {
       width: '500px',
+      hasBackdrop: true,
+      backdropClass: 'main-backdrop',
       data: {
         id: '1',
         title: 'Adicionar nova turma',
@@ -62,6 +64,8 @@ export class MyClassesComponent implements OnInit {
     this.dialog.open(DialogBaseComponent, {
       width: '500px',
       id: '2',
+      hasBackdrop: true,
+      backdropClass: 'main-backdrop',
       data: {
         title: 'Atenção!',
         message: 'Você deseja realmente remover estas turmas?',

@@ -18,6 +18,10 @@ const routes: Routes = [
     path: ':idTurma',
     component: ClassListComponent,
     canActivate: [AuthRoleProfessorGuard]
+  },
+  {
+    path: ':idTurma/atividades-enviadas/:aulaId',
+    loadChildren: () => import('../../activities-sent/activities-sent.module').then(m => m.ActivitiesSentModule)
   }
 ];
 

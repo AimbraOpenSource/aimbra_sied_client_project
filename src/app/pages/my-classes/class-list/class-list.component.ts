@@ -5,11 +5,11 @@ import {TurmaService} from '../turma.service';
 import {TurmaModel} from 'src/app/core/models/turma.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Location} from '@angular/common';
-import {AulaService} from './aula.service';
+import {AulaService} from '../../../core/services/aula.service';
 import {AulaModel} from 'src/app/core/models/aula.model';
-import {MatDialog} from "@angular/material/dialog";
-import {DialogBaseComponent} from "../../../components/dialog-base/dialog-base.component";
-import {Clipboard} from "@angular/cdk/clipboard";
+import {MatDialog} from '@angular/material/dialog';
+import {DialogBaseComponent} from '../../../components/dialog-base/dialog-base.component';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-class-list',
@@ -90,6 +90,8 @@ export class ClassListComponent implements OnInit {
 
   remove(aula: AulaModel) {
     this.dialog.open(DialogBaseComponent, {
+      hasBackdrop: true,
+      backdropClass: 'main-backdrop',
       width: '500px',
       id: aula.id.toString(),
       data: {
@@ -125,7 +127,7 @@ export class ClassListComponent implements OnInit {
   copyToClipboard() {
     const link = `localhost:4200/#/disciplinas/${this.turma.uuid}/confirma-convite`;
     this.clipboard.copy(link);
-    this.snack.open(`O link "${link}" de convite foi copiado para a área de transferência`, 'Ok', {
+    this.snack.open(`O link '${link}' de convite foi copiado para a área de transferência`, 'Ok', {
       duration: 8000,
       panelClass: 'primary',
       verticalPosition: 'top',
