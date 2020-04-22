@@ -10,6 +10,8 @@ import {Location} from '@angular/common';
 import {AulaService} from '../../core/services/aula.service';
 import {AulaModel} from '../../core/models/aula.model';
 import {HttpErrorResponse} from '@angular/common/http';
+import { RespostaReportService } from 'src/app/core/services/resposta-report.service';
+import { RespostaReportModel } from 'src/app/core/models/resposta-report.model';
 
 @Component({
   selector: 'app-subject-details',
@@ -22,6 +24,7 @@ export class SubjectDetailsComponent implements OnInit {
   turma: TurmaModel;
   aulas: AulaModel[];
   userLoggedin: UserModel;
+  respostaReport: RespostaReportModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,12 +33,12 @@ export class SubjectDetailsComponent implements OnInit {
     private turmaService: TurmaService,
     private localStorageService: LocalStorageService,
     private snack: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private respostaReportService: RespostaReportService,
   ) { }
 
   ngOnInit(): void {
     this.findParam();
-
   }
 
   findParam() {
@@ -46,6 +49,14 @@ export class SubjectDetailsComponent implements OnInit {
       this.findUserLoggedin();
       this.isProfessor();
       this.isAlreadyJoined();
+    });
+  }
+
+  findRespostaReport() {
+    this.respostaReportService.getReportByTurmaId(this.turma.id).subscribe((resp: RespostaReportModel) => {
+      this.respostaReport = resp;
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
     });
   }
 
@@ -75,6 +86,7 @@ export class SubjectDetailsComponent implements OnInit {
     await this.turmaService.findByUuid(this.uuid).subscribe((turma: TurmaModel) => {
       this.turma = turma;
       this.findAulasByTurmaId();
+      this.findRespostaReport();
     });
   }
 
