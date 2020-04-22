@@ -37,11 +37,48 @@
         </section>
       </div>
       <div class="col-4">
-        <app-material-card [title]="'Recursos do professor'">
-          <div body>
-            <app-resource-class-widget [aulaId]="atividade.aula.id" (hasRecurso)="hasRecurso = $event"></app-resource-class-widget>
-          </div>
-        </app-material-card>
+        <section>
+          <button mat-stroked-button color="primary" [disabled]="true" class="w-100 mb-3 pt-3 pb-3 d-flex flex-row justify-content-between">
+              <mat-icon class="mat-icon-clicked">play_arrow</mat-icon> Disponível em 5 minutos
+          </button>
+        </section>
+        <section class="mb-3">
+          <mat-card class="example-card pb-2 card-file w-100 bg-info text-light">
+            <div class="d-flex flex-row justify-content-between">
+              <div class="mt-1 w-50">
+                <p>Enviar atividade</p>
+              </div>
+              <div style="margin-top: 6px">
+                <mat-icon style="font-size:2rem" [inline]="true">cloud_upload</mat-icon>
+              </div>
+            </div>
+            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" hidden>
+          </mat-card>
+        </section>
+        <section class="mb-3">
+          <mat-card>
+            <mat-card-content *ngIf="resposta" >
+              <h4>Enviar resposta em texto</h4>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Digite sua resposta em texto</mat-label>
+                <textarea matInput [(ngModel)]="resposta.descricao" rows="10"></textarea>
+              </mat-form-field>
+              <button mat-flat-button color="primary" (click)="sendText()">Enviar em texto</button>
+            </mat-card-content>
+          </mat-card>
+        </section>
+        <section>
+
+          <mat-card class="example-card pb-2 w-100">
+            <mat-card-content>
+              <h4>Recursos do professor</h4>
+              <div class="mb-4">
+                <app-resource-class-widget [aulaId]="atividade.aula.id" (hasRecurso)="hasRecurso = $event"></app-resource-class-widget>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+        </section>
       </div>
     </div>
   </section>

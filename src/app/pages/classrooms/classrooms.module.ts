@@ -10,6 +10,10 @@ import { DisqusCommentModule } from 'src/app/components/disqus-comment/disqus-co
 import { MaterialCardComponent } from 'src/app/components/cards/material-card/material-card.component';
 import { MaterialCardModule } from 'src/app/components/cards/material-card/material-card.module';
 import { ResourceClassWidgetModule } from 'src/app/shared/widgets/resource-class-widget/resource-class-widget.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -25,11 +29,16 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     YoutubeVideoModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
+    MatInputModule,
     MatSnackBarModule,
     DisqusCommentModule,
     MaterialCardModule,
-    ResourceClassWidgetModule
+    ResourceClassWidgetModule,
+    MatIconModule,
+    MatCardModule
   ],
   exports: [ClassroomsComponent],
 })
