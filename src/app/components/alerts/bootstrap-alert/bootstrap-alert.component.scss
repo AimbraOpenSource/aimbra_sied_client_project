@@ -1,0 +1,10 @@
+.close-btn {
+  margin: {
+    top: -2px;
+    bottom: -2px;
+  };
+  &:hover {
+    color: #b80f0f;
+    cursor: pointer;
+  }
+}

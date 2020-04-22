@@ -1,6 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProfessorService } from 'src/app/domain/professor/professor.service';
-import { AlunoService } from 'src/app/domain/aluno/aluno.service';
+import { ProfessorService } from 'src/app/core/services/professor.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/security/auth/auth.service';
@@ -9,6 +8,8 @@ import { AlunoModel } from 'src/app/core/models/aluno.model';
 import { ProfessorModel } from 'src/app/core/models/professor.model';
 import { UserRole } from 'src/app/core/models/user-role.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AlunoService } from 'src/app/core/services/aluno.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private alunoService: AlunoService,
     private professorService: ProfessorService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -106,6 +108,10 @@ export class ProfileComponent implements OnInit {
         duration: 5000
       });
     });
+  }
+
+  logout() {
+    this.router.navigate(['/logout']);
   }
 
   initUpdate() {

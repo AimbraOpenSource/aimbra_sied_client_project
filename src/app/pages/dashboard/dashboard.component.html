@@ -1,4 +1,32 @@
 <header>
   <h1>Painel Principal</h1>
+
+  <section class="mt-5">
+    <app-youtube-video [videoId]="'TeUbadoFDY4'"></app-youtube-video>
+  </section>
+
+
+  <section>
+    <app-bootstrap-alert [message]="'This is alert message'" [show]="true" [color]="'danger'"></app-bootstrap-alert>
+  </section>
+
+  <section class="mt-5">
+    <app-material-card [title]="'Tem titulo sim'" [subtitle]="'Também tem subtitle'">
+      <div body>
+        <div>
+          Aqui vai o corpo com a mensagem
+        </div>
+      </div>
+      <div action>
+        <button mat-flat-button color="accent">Flat Button</button>
+        <button mat-stroked-button color="primary">Stroked Button</button>
+      </div>
+    </app-material-card>
+  </section>
 </header>
+
+<section>
+  <button class="btn btn-primary" (click)="showComments = !showComments">Show Comments</button>
+  <app-disqus-comment *ngIf="showComments"></app-disqus-comment>
+</section>
 

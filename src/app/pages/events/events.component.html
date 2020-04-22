@@ -1,3 +1,8 @@
 <header>
   <h1>Eventos</h1>
 </header>
+
+<button class="btn btn-primary" (click)="showComments = !showComments">Show comments</button>
+<footer>
+  <app-disqus-comment *ngIf="showComments"></app-disqus-comment>
+</footer>

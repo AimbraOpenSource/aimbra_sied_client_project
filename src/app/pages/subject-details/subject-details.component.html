@@ -1,3 +1,22 @@
 <header>
-  <h1>Disciplinas</h1>
+  <h1>{{ turma?.curso?.nome }}</h1>
+  <h5>Esta turma esta sendo lecionada pelo professor(a) {{ turma?.professor?.nome }}</h5>
 </header>
+
+<mat-card *ngFor="let aula of aulas" class="mt-3">
+  <mat-card-header>
+    <mat-card-subtitle>Aula {{ aula.ordem }}</mat-card-subtitle>
+    <mat-card-title class="mt-1">{{ aula.titulo}}</mat-card-title>
+  </mat-card-header>
+  <mat-divider class="mb-3"></mat-divider>
+  <mat-card-content class="mt-3 pl-4 d-flex flex-row justify-content-between">
+    <div>
+      <button mat-stroked-button color="primary" class="mr-3" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'below'" matTooltipClass="bg-dark">Ir para aula</button>
+      <button mat-stroked-button color="accent" disabled>
+        <mat-icon class="mat-18">play_arrow</mat-icon>
+        Aula ao vivo
+      </button>
+    </div>
+    
+  </mat-card-content>
+</mat-card>

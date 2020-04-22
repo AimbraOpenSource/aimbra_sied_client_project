@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<p>Preencha no campo abaixo o nome da nova turma</p>
+
+<div mat-dialog-content>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Entre com seu email</mat-label>
+    <input matInput [(ngModel)]="curso.nome" type="text" cdkFocusInitial>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions class="text-right mt-2 mb-3">
+  <button mat-stroked-button (click)="dialogRef.close()">Cancelar</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="curso">Salvar</button>
+</div>

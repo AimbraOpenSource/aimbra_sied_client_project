@@ -1,0 +1,64 @@
+<header>
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <h1>Aulas da Turma de {{ turma?.curso?.nome }}</h1>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" [routerLink]="['/minhas-turmas/formulario/modo/cria']" [queryParams]="{ 'turmaId': turma?.id }">
+        <mat-icon class="mat-18">add</mat-icon>
+        Adicionar nova aula
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="row mt-5">
+  <div class="col-9">
+
+    <mat-card *ngFor="let aula of aulas" class="mt-3">
+      <mat-card-header>
+        <mat-card-subtitle>Aula {{ aula.ordem }}</mat-card-subtitle>
+        <mat-card-title class="mt-1">{{ aula.titulo}}</mat-card-title>
+      </mat-card-header>
+      <mat-divider class="mb-3"></mat-divider>
+      <mat-card-content class="mt-3 pl-4 d-flex flex-row justify-content-between">
+        <div>
+          <button mat-stroked-button color="primary" class="mr-3" (click)="goToUrl('/atividades-enviadas', aula.id.toString())" matTooltip="Ver lista de atividades enviadas pelos alunos" [matTooltipPosition]="'below'" matTooltipClass="bg-dark">Atividades enviadas</button>
+          <button mat-stroked-button color="accent" disabled>
+            <mat-icon class="mat-18">play_arrow</mat-icon>
+            Aula ao vivo
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button [routerLink]="['/minhas-turmas/formulario/modo/edita', aula.id]" [queryParams]="{ 'turmaId': aula.turma.id }" color="accent" matTooltip="Editar esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+              <mat-icon class="mat-18">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="remove(aula)" color="warn" matTooltip="Remove esta aula" [matTooltipPosition]="'left'"  matTooltipClass="bg-dark">
+              <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+  <div class="col-3">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Alunos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-flat-button color="accent" class="w-100 d-flex flex-row justify-content-between bg-info" (click)="copyToClipboard()">
+            <mat-icon class="mat-18 mr-2">file_copy</mat-icon>
+            convidar um aluno
+          </button>
+            <mat-list>
+              <mat-list-item *ngFor="let aluno of turma?.alunos">
+                <div mat-line>{{aluno?.nome}}</div>
+                <div mat-line> {{aluno?.user?.username | date}} </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './security/auth/auth.guard';
+import { LogoutComponent } from './pages/logout/logout.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 const routes: Routes = [
@@ -15,6 +17,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   },
   {
     path: 'registro',
@@ -36,7 +42,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'estudades',
+    path: 'meus-estudantes',
     loadChildren: () => import('./pages/students/students.module').then(m => m.StudentsModule),
     canActivate: [AuthGuard]
   },
@@ -46,8 +52,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'turmas',
+    path: 'sala-de-aula',
     loadChildren: () => import('./pages/classrooms/classrooms.module').then(m => m.ClassroosModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'minhas-turmas',
+    loadChildren: () => import('./pages/my-classes/my-classes.module').then(m => m.MyClassesModule),
     canActivate: [AuthGuard]
   },
   {
@@ -55,10 +66,26 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'zoom/users',
+    loadChildren: () => import('./pages/zoom/users/users.module').then(m => m.UsersModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'zoom/configuration',
+    loadChildren: () => import('./pages/zoom/zoom-configuration/zoom-configuration.module').then(m => m.ZoomConfigurationModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ]
 })
 export class AppRoutingModule { }

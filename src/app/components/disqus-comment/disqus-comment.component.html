@@ -1,0 +1,12 @@
+<p>Identifieer: {{indentifier}}</p>
+<p>url: {{fullPath}}</p>
+
+<!--  [url]="fullPath"-->
+<disqus
+  [identifier]="indentifier"
+  [category]="category"
+  [language]="'pt'"
+  (newComment)="onComment($event)"
+  (ready)="onReady($event)"
+  (paginate)="onPaginate($event)"
+></disqus>

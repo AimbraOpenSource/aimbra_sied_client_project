@@ -24,3 +24,27 @@ aside {
 .container-page {
   padding: 50px 20px;
 }
+
+
+input input.form-control button button.btn .mat-focus-indicator .mat-raised-button .mat-button-base .mat-primary .mat-button-focus-overlay{
+  &:focus {
+    box-shadow: unset !important;
+  }
+}
+
+table {
+  tbody {
+    tr {
+      &:hover {
+        background-color: rgb(240,240,240);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.snk-label {
+  .mat-button-wrapper {
+    color: white;
+  }
+}

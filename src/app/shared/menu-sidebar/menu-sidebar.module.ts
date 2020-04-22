@@ -5,6 +5,8 @@ import { InstitutionalModule } from '../widgets/institutional/institutional.modu
 import { SubjectsModule } from '../widgets/subjects/subjects.module';
 import { TeacherManagementModule } from '../widgets/teacher-management/teacher-management.module';
 import { UserWidgetModule } from '../widgets/user-widget/user-widget.module';
+import { RootModule } from '../widgets/root/root.module';
+import {RouterModule} from "@angular/router";
 
 
 
@@ -15,7 +17,9 @@ import { UserWidgetModule } from '../widgets/user-widget/user-widget.module';
     InstitutionalModule,
     SubjectsModule,
     TeacherManagementModule,
-    UserWidgetModule
+    UserWidgetModule,
+    RootModule,
+    RouterModule
   ],
   exports: [MenuSidebarComponent],
 })

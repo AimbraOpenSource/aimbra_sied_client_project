@@ -14,26 +14,26 @@
         <button mat-raised-button color="" (click)="openBottomSheet()" class="form-control mb-3">Selecione o tipo de usuário</button>
       </div>
       <form class="form" [formGroup]="registerFormGroup" novalidate autocomplete="off" *ngIf="!!aluno || !!professor">
-        <div class="form-group">
-          <label>Nome e Sobrenome:</label>
-          <input type="text" class="form-control" placeholder="Entre com nome e sobrenome" formControlName="name">
-        </div>
-        <div class="form-group">
-          <label>Apelido</label>
-          <input type="text" class="form-control" placeholder="Entre com um apelido" formControlName="username">
-        </div>
-        <div class="form-group">
-          <label>Email:</label>
-          <input type="email" class="form-control" placeholder="Entre com seu email" formControlName="email">
-        </div>
-        <div class="form-group">
-          <label>Senha</label>
-          <input type="password" class="form-control" placeholder="Entre com sua senha" formControlName="password">
-        </div>
-        <div class="form-group">
-          <label>Repita senha</label>
-          <input type="password" class="form-control" placeholder="Entre com sua senha novamente" formControlName="repeatPassword">
-        </div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Nome e sobrenome</mat-label>
+          <input matInput formControlName="name" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Apelido</mat-label>
+          <input matInput formControlName="username" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="password" type="password">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="repeatPassword" type="password">
+        </mat-form-field>
       </form>
     </mat-card-content>
 

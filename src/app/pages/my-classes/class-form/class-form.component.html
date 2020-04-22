@@ -1,0 +1,180 @@
+<header *ngIf="isEditMode">
+  <h1>Editar a aula 1</h1>
+</header>
+
+<header *ngIf="!isEditMode">
+  <h1>Criação de uma aula</h1>
+  <p>Adicionar uma aula para a turma de algoritmos e solução</p>
+</header>
+<div class="row" *ngIf="atividade !== undefined && atividade !== null">
+
+  <div class="col-9">
+    <section class="mt-5">
+
+      <mat-card class="example-card p-5">
+        <mat-card-header>
+          <mat-card-title>Informações e recursos base</mat-card-title>
+          <mat-card-subtitle>Preencha os campos abaixo, pois eles são obrigatórios para a base de uma aula</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="p-4">
+
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Titulo</mat-label>
+              <input matInput [(ngModel)]="atividade.aula.titulo">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>URL do youtube</mat-label>
+              <input matInput [(ngModel)]="atividade.aula.urlVideoGravado">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>O que o aluno vai aprender?</mat-label>
+              <textarea matInput [(ngModel)]="atividade.aula.descricao"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Observações importantes para o aluno</mat-label>
+              <textarea matInput [(ngModel)]="atividade.aula.observacao"></textarea>
+            </mat-form-field>
+
+            <div class="row">
+              <div class="col-7">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Exercícios propostos para o aluno</mat-label>
+                  <textarea matInput [(ngModel)]="atividade.descricao"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-5">
+                <section class="d-flex flex-column mt-5 align-baseline">
+                  <div>
+                    <mat-slide-toggle class="text-left pb-3" [(ngModel)]="atividade.aula.configuracao.alunoFazUpload">O aluno faz upload?</mat-slide-toggle>
+                  </div>
+                  <div>
+                    <mat-slide-toggle class="text-left" [(ngModel)]="atividade.aula.configuracao.respostaTemTexto">A resposta tem campo de texto?</mat-slide-toggle>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="example-card p-5 mt-5">
+        <mat-card-header>
+          <mat-card-title>Ao vivo</mat-card-title>
+          <mat-card-subtitle>Caso tenha recursos de aula ao vivo, ative a opção abaixo e preencha as opções.</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="p-4">
+          <section class="mb-5">
+            <mat-slide-toggle [(ngModel)]="atividade.aula.configuracao.temAulaAoVivo">Vai ter aula ao vivo deste conteúdo?</mat-slide-toggle>
+            <mat-slide-toggle class="ml-5" *ngIf="isEditMode" >A aula ao vivo foi realizada?</mat-slide-toggle>
+          </section>
+          <div class="row" *ngIf="atividade?.aula?.configuracao?.temAulaAoVivo === true" >
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Data da aula ao vivo</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="atividade.aula.reuniao.dataHoraInicio">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Select</mat-label>
+                <mat-select [(ngModel)]="atividade.aula.reuniao.hora">
+                  <mat-option [value]="t" *ngFor="let t of times">{{ t }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Titulo personalizado da aula</mat-label>
+                <input matInput [(ngModel)]="atividade.aula.reuniao.topico">
+              </mat-form-field>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+
+      <mat-card class="example-card p-5 mt-5">
+        <mat-card-header>
+          <mat-card-title>Área de Discussão</mat-card-title>
+          <mat-card-subtitle>Caso habilitar o recurso de forum de duvidas.</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="p-4">
+          <section class="mb-5">
+            <mat-slide-toggle [(ngModel)]="atividade.aula.configuracao.temDiscusao">Deseja habilitar a área de discussão para solucionar duvidas?</mat-slide-toggle>
+          </section>
+        </mat-card-content>
+      </mat-card>
+
+    </section>
+  </div>
+
+  <div class="col-3" style="position: fixed; right: 25px;">
+    <mat-card class="example-card mt-5">
+      <mat-card-content>
+
+        <button mat-raised-button color="primary" class="w-100" (click)="publish()">{{ atividade.aula.configuracao.temAgendamento && atividade.aula.reuniao.dataHoraInicio ? 'Agendar' : 'Publicar agora'}}</button>
+        <section class="mt-3 mb-3">
+          <mat-slide-toggle [(ngModel)]="atividade.aula.configuracao.temAgendamento" color="primary" (change)="atividade.liberadoEm = null">Deseja agendar?
+          </mat-slide-toggle>
+        </section>
+        <mat-form-field appearance="outline" class="w-100" *ngIf="atividade.aula.configuracao.temAgendamento" >
+          <mat-label>Deseja Agendar?</mat-label>
+          <input matInput [matDatepicker]="schedule" [(ngModel)]="atividade.liberadoEm">
+          <mat-datepicker-toggle matSuffix [for]="schedule"></mat-datepicker-toggle>
+          <mat-datepicker #schedule></mat-datepicker>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="example-card mt-3">
+      <mat-card-header>
+        <mat-card-title>Área de recursos</mat-card-title>
+        <mat-card-subtitle>Caso habilitar o recurso de forum de duvidas.</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content >
+        <div class="file-input-area w-100">
+          <label class="w-100">
+<!--            (click)="fileInput.click()"-->
+            <mat-card class="example-card pb-2 card-file w-100 bg-info">
+              <div class="d-flex flex-row justify-content-between">
+                <div class="mt-1 w-50">
+                  <p>Selecione um arquivo</p>
+                </div>
+                <div style="margin-top: 4px">
+                  <mat-icon style="font-size:2rem" [inline]="true">cloud_upload</mat-icon>
+                </div>
+              </div>
+            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" hidden>
+            </mat-card>
+          </label>
+        </div>
+        <div>
+          <div class="list-group" *ngIf="recursos.size > 0">
+            <div href="#" class="list-group-item list-group-item-action d-flex flex-row justify-content-between" *ngFor="let r of recursos">
+              <div class="d-flex flex-row justify-content-between">
+                <div>
+                  <mat-icon (click)="onFileRemove(r)">{{getIcon(r.nomeReal)}}</mat-icon>
+                </div>
+                <div class="mt-1 ml-2" (click)="toogleFileName(r)">
+                  {{ r.nomeReal }}
+                </div>
+              </div>
+              <div><mat-icon (click)="onFileRemove(r)" class="mat-icon-clicked" >delete</mat-icon></div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
+

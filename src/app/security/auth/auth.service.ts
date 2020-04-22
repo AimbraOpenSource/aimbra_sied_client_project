@@ -1,11 +1,11 @@
 import { environment } from './../../../environments/environment';
 import { Injectable, Type } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ProfessorModel } from 'src/app/core/models/professor.model';
 import { AlunoModel } from 'src/app/core/models/aluno.model';
@@ -18,6 +18,8 @@ export class AuthService {
   private URL = environment.url + '/security/auth';
   lastUrl: string;
 
+  public isLoggedIn: boolean;
+
   constructor(
     private localStorageService: LocalStorageService,
     private http: HttpClient,
@@ -25,7 +27,6 @@ export class AuthService {
   ) {}
 
   public login(email: string, password: string): Observable<UserModel> {
-    console.log(this.URL);
     return this.http
       .post<UserModel>(`${this.URL}/login`, { username: email, password })
       .pipe(
@@ -57,16 +58,16 @@ export class AuthService {
     this.router.navigate(['/login', btoa(path)]);
   }
 
-  public logout(): void {
-    window.localStorage.clear();
+  public logout(): Observable<string> {
+    return this.http.get<string>(this.URL + '/logout');
   }
 
   public isLoggedin(): boolean {
-    return this.localStorageService.user !== null;
+    this.isLoggedIn = this.localStorageService.user !== null;
+    return this.isLoggedIn;
   }
 
   public get user(): UserModel {
-    console.log(this.localStorageService.user);
     return this.localStorageService.user;
   }
 

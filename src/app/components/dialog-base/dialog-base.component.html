@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{data?.title}}</h1>
+<div mat-dialog-content>
+  <p>{{ data?.message }}</p>
+  <div *ngIf="hasInput()">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>{{ data?.label }}</mat-label>
+      <label>
+        <input matInput [(ngModel)]="data.value">
+      </label>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="mb-1">
+  <button mat-stroked-button (click)="onNoClick()" class="mr-1" *ngIf="data?.buttonCancel === true">No, Obrigado!</button>
+  <div *ngIf="data?.withoutConfirmationText === false">
+    <button mat-flat-button color="accent" [mat-dialog-close]="data.value" [disabled]="data.value !== 'SIM'">Estou certo disso!</button>
+  </div>
+  <div *ngIf="data?.withoutConfirmationText === true">
+    <button mat-flat-button color="accent" [mat-dialog-close]="data.value">Ok!</button>
+  </div>
+</div>

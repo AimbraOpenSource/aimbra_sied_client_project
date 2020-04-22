@@ -1,0 +1,31 @@
+<h1>Área de configuração do Zoom</h1>
+
+<app-material-card title="Campos de configuração" subtitle="Preencha os campos corretamente" [hasDividerBotton]="true">
+  <div body>
+    <div class="text-sm-right text-danger">Sua chave expira em 3 dias</div>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>API Key</mat-label>
+      <input matInput [(ngModel)]="configuration.apiKey" type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Api Secret</mat-label>
+      <input matInput [(ngModel)]="configuration.apiSecret" type="password">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>IM Chat History Token</mat-label>
+      <input matInput [(ngModel)]="configuration.imChatHistoryToken" type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Chave JWT</mat-label>
+      <input matInput [(ngModel)]="configuration.jwtToken" type="text">
+    </mat-form-field>
+  </div>
+  <div action>
+    <div class="d-flex flex-row justify-content-between">
+      <div>
+        <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</app-material-card>
