@@ -171,17 +171,11 @@ export class ClassFormComponent implements OnInit {
     } else {
       this.recursos.delete(r);
     }
-    this.deletaSeExisteNoServer(r);
-  }
-
-  private deletaSeExisteNoServer(r: RecursoModel) {
-    if (this.recursos.size > 0) {
-      this.recursoService.deleteById(r.id).subscribe(() => {
-        console.log('sucesso ao deletar');
-      }, (err: HttpErrorResponse) => {
-        console.error(err);
-      });
-    }
+    this.recursoService.deleteById(r.id).subscribe(() => {
+      console.log('sucesso ao deletar');
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
+    });
   }
 
   getIcon(type: string) {
