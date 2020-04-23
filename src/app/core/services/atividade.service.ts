@@ -1,15 +1,15 @@
-import {Injectable} from "@angular/core";
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {AtividadeModel} from "../models/atividade.model";
+import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {AtividadeModel} from '../models/atividade.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AtividadeService {
 
-  private url = environment.url + '/atividades'
+  private url = environment.url + '/atividades';
 
   constructor(private http: HttpClient) {
   }

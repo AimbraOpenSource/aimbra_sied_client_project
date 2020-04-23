@@ -1,4 +1,4 @@
-import {AulaModel} from "./aula.model";
+import {AulaModel} from './aula.model';
 
 export class AtividadeModel {
   id: number;

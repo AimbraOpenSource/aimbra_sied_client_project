@@ -11,7 +11,7 @@ export class LocalStorageService {
 
   constructor() { }
 
-  public set turmas (turmas: TurmaModel[]) {
+  public set turmas(turmas: TurmaModel[]) {
     window.localStorage.setItem('turmas', JSON.stringify(turmas));
   }
 
