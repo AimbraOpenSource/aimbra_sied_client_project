@@ -6,24 +6,29 @@ import { AtividadeModel } from 'src/app/core/models/atividade.model';
 import { RespostaModel } from 'src/app/core/models/resposta.model';
 import { RespostaService } from 'src/app/core/services/resposta.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RecursoService } from 'src/app/core/services/recurso.service';
+import { RecursoModel } from 'src/app/core/models/recurso.model';
 
 @Component({
   selector: 'app-classrooms',
-  templateUrl: './classrooms.component.html',
-  styleUrls: ['./classrooms.component.scss']
+  templateUrl: './classroom.component.html',
+  styleUrls: ['./classroom.component.scss']
 })
-export class ClassroomsComponent implements OnInit {
+export class ClassroomComponent implements OnInit {
 
   aulaId: number;
   atividade: AtividadeModel;
   resposta: RespostaModel;
   showComments = false;
   hasRecurso: boolean;
+  recursos: RecursoModel[] = [];
+  recursosResposta: RecursoModel[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private snack: MatSnackBar,
     private respostaService: RespostaService,
+    private recursoService: RecursoService,
     private atividadeService: AtividadeService) {
     }
 
@@ -53,6 +58,7 @@ export class ClassroomsComponent implements OnInit {
       if (!this.resposta) {
         this.resposta = new RespostaModel();
       }
+      this.findAllRecursosDaResposta();
     }, (err: HttpErrorResponse) => {
       console.error(err);
     });
@@ -69,6 +75,29 @@ export class ClassroomsComponent implements OnInit {
     } else {
       this.updateResposta();
     }
+  }
+
+
+  findAllRecursosDaResposta() {
+    this.recursoService.findRespostasByUsername(this.aulaId).subscribe((recursos: RecursoModel[]) => {
+      this.recursosResposta = recursos;
+      console.log('Recursos respostas', this.recursosResposta);
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
+    });
+  }
+
+  deleteFileByIdRecurso() {
+    this.respostaService.deleteFileById(this.atividade.id).subscribe(() => {
+      this.snack.open('Sucesso ao remover', 'Ok', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        duration: 6000
+      });
+      this.recursosResposta = [];
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
+    });
   }
 
   insertResposta() {
@@ -99,8 +128,23 @@ export class ClassroomsComponent implements OnInit {
     });
   }
 
-  onFileSelected($event) {
-
+  onFileSelected(event) {
+    const file = event.srcElement.files[0] as File;
+    if (file.size > 4000000) {
+      this.snack.open('Limite do arquivi é de 4MB', 'Ok', {
+        duration: 6000,
+        verticalPosition: 'top',
+        panelClass: ['bg-danger']
+      });
+      return;
+    }
+    this.respostaService.sendFile(file, this.atividade.id).subscribe((resp: RespostaModel) => {
+      this.resposta = resp;
+      this.findRespostaByAtividadeId();
+      this.findAllRecursosDaResposta();
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
+    });
   }
 
 }

@@ -30,7 +30,7 @@ export class ResourceClassWidgetComponent implements OnInit {
   findAllById() {
     this.recursoService.findAllByAulaId(this.aulaId).subscribe((recursos: RecursoModel[]) => {
       this.recursos = recursos;
-      console.log(this.recursos);
+      console.log('recurso Widget', this.recursos);
       this.emit();
     }, (err: HttpErrorResponse) => {
       console.error(err);

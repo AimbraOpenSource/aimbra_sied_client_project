@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'sala-de-aula',
-    loadChildren: () => import('./pages/classrooms/classrooms.module').then(m => m.ClassroosModule),
+    loadChildren: () => import('./pages/classroom/classroom.module').then(m => m.ClassroosModule),
     canActivate: [AuthGuard]
   },
   {
@@ -61,11 +61,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/my-classes/my-classes.module').then(m => m.MyClassesModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'atividades-enviadas',
-  //   loadChildren: () => import('./pages/activities-sent/activities-sent.module').then(m => m.ActivitiesSentModule),
-  //   canActivate: [AuthGuard]
-  // },
   {
     path: 'perfil',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),

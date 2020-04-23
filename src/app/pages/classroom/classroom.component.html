@@ -43,17 +43,29 @@
           </button>
         </section>
         <section class="mb-3">
-          <mat-card class="example-card pb-2 card-file w-100 bg-info text-light">
-            <div class="d-flex flex-row justify-content-between">
-              <div class="mt-1 w-50">
-                <p>Enviar atividade</p>
-              </div>
-              <div style="margin-top: 6px">
-                <mat-icon style="font-size:2rem" [inline]="true">cloud_upload</mat-icon>
-              </div>
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputResposta" aria-describedby="inputResposta" (change)="onFileSelected($event)">
+              <label class="custom-file-label" for="inputResposta">Escolher arquivo .rar ou .zip</label>
             </div>
-            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" hidden>
-          </mat-card>
+          </div>
+          <div class="alert alert-info" *ngIf="resposta">
+            Data do seu envio: {{ resposta.atualizadoEm | date : 'dd/MM/yyyy'}}
+          </div>
+          <div *ngIf="recursosResposta.length > 0">
+            <h4>Sua Resposta</h4>
+            <div class="list-group">
+              <a href="javascript: void;" class="list-group-item list-group-item-action d-flex flex-row justify-content-between" *ngFor="let r of recursosResposta">
+                <div class="mt-1">
+                  {{ r.nomeReal }}
+                </div>
+                <div>
+                  <mat-icon (click)="deleteFileByIdRecurso()">delete</mat-icon>
+                </div>
+              </a>
+
+            </div>
+          </div>
         </section>
         <section class="mb-3">
           <mat-card>
@@ -73,7 +85,7 @@
             <mat-card-content>
               <h4>Recursos do professor</h4>
               <div class="mb-4">
-                <app-resource-class-widget [aulaId]="atividade.aula.id" (hasRecurso)="hasRecurso = $event"></app-resource-class-widget>
+                <app-resource-class-widget [aulaId]="atividade?.aula?.id" (hasRecurso)="hasRecurso = $event"></app-resource-class-widget>
               </div>
             </mat-card-content>
           </mat-card>

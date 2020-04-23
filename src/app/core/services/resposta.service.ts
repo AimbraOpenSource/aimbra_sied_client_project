@@ -31,4 +31,16 @@ export class RespostaService {
       )
     });
   }
+
+  sendFile(file: File, atividadeId: number): Observable<RespostaModel> {
+    const formData = new FormData();
+    formData.set('file', file);
+    return this.http.post<RespostaModel>(`${this.url}/files`, formData, {
+      params: new HttpParams().set('atividadeId', atividadeId.toString())
+    });
+  }
+
+  deleteFileById(atividadeId: number): Observable<any> {
+    return this.http.delete(`${this.url}/files?atividadeId=${atividadeId}`);
+  }
 }

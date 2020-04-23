@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClassroomsComponent } from './classrooms.component';
+import { ClassroomComponent } from './classroom.component';
 import { Routes, RouterModule } from '@angular/router';
 import { YoutubeVideoModule } from 'src/app/components/youtube-video/youtube-video.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,12 +18,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: ':aulaId',
-    component: ClassroomsComponent,
+    component: ClassroomComponent,
   },
 ];
 
 @NgModule({
-  declarations: [ClassroomsComponent],
+  declarations: [ClassroomComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -40,6 +40,6 @@ const routes: Routes = [
     MatIconModule,
     MatCardModule
   ],
-  exports: [ClassroomsComponent],
+  exports: [ClassroomComponent],
 })
 export class ClassroosModule { }
