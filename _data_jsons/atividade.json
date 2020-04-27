@@ -1,0 +1,27 @@
+{
+  "aula": {
+    "titulo": "Solid: Introdução aos padrões de projeto",
+    "urlVideoGravado": "https://www.youtube.com/watch?v=rnWPWU7XKeg",
+    "descricao": "SOLID é um conjunto de princípios que auxiliam o desenvolvedor na programação Orientada a Objetos.\nPrincípios que promovem desacoplamento e melhor utilização dos objetos, facilitando o desenvolvimento orientando a testes e a manutenção e evolução do Software.",
+    "observacao": "SOLID é um conjunto de princípios que auxiliam o desenvolvedor na programação Orientada a Objetos.\nPrincípios que promovem desacoplamento e melhor utilização dos objetos, facilitando o desenvolvimento orientando a testes e a manutenção e evolução do Software.",
+    "reuniao": {
+      "dataHoraInicio": "2020-04-30 00:00:00",
+      "hora": "18:30",
+      "topico": "Personalizado intem",
+      "duracao": 60
+    },
+    "configuracao": {
+      "alunoFazUpload": true,
+      "respostaTemTexto": true,
+      "temAulaAoVivo": true,
+      "temDiscusao": true,
+      "temAgendamento": true
+    },
+    "turma": {
+      "id": 57
+    }
+  },
+  "descricao": "SOLID é um conjunto de princípios que auxiliam o desenvolvedor na programação Orientada a Objetos.\nPrincípios que promovem desacoplamento e melhor utilização dos objetos, facilitando o desenvolvimento orientando a testes e a manutenção e evolução do Software.",
+  "liberadoEm": "2020-04-23 00:00:00",
+  "criadoEm": "2020-04-23 23:40:30"
+}

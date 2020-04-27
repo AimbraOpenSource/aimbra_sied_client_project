@@ -5,16 +5,18 @@ import {AulaModel} from 'src/app/core/models/aula.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Location} from '@angular/common';
-import {TurmaModel} from "../../../core/models/turma.model";
-import {AtividadeModel} from "../../../core/models/atividade.model";
-import {AulaConfiguracaoModel} from "../../../core/models/aula-configuracao.model";
-import {ReuniaoModel} from "../../../core/models/reuniao.model";
-import {AtividadeService} from "../../../core/services/atividade.service";
-import {MatDialog} from "@angular/material/dialog";
-import {DialogBaseComponent} from "../../../components/dialog-base/dialog-base.component";
+import {TurmaModel} from '../../../core/models/turma.model';
+import {AtividadeModel} from '../../../core/models/atividade.model';
+import {AulaConfiguracaoModel} from '../../../core/models/aula-configuracao.model';
+import {ReuniaoModel} from '../../../core/models/reuniao.model';
+import {AtividadeService} from '../../../core/services/atividade.service';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogBaseComponent} from '../../../components/dialog-base/dialog-base.component';
 import * as moment from 'moment';
-import {RecursoService} from "../../../core/services/recurso.service";
-import {RecursoModel} from "../../../core/models/recurso.model";
+import {RecursoService} from '../../../core/services/recurso.service';
+import {RecursoModel} from '../../../core/models/recurso.model';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AulaFormConfigService } from './aula-form-config';
 
 @Component({
   selector: 'app-class-form',
@@ -30,7 +32,10 @@ export class ClassFormComponent implements OnInit {
   atividade: AtividadeModel;
   files: Set<File>;
 
+  atividadeFormGroup: FormGroup;
+
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -52,18 +57,88 @@ export class ClassFormComponent implements OnInit {
   }
 
   /**
+   * TODO Criar formulário para modo update
+   */
+  patchForm() {
+
+  }
+
+  initForm() {
+    this.atividadeFormGroup = this.getConfig();
+  }
+
+  findByAulaId() {
+    this.atividadeService.findByAulaId(this.aulaId).subscribe((atividade: AtividadeModel) => {
+      this.atividade = atividade;
+      this.initForm();
+    }, (err: HttpErrorResponse) => {
+      this.snack.open(err.error.message, null, { duration: 5000 }).afterOpened().subscribe(() => {
+        this.location.back();
+      });
+    });
+  }
+
+  private getConfig(): FormGroup {
+    return this.fb.group({
+      infoGroup: this.getInfoGroup(),
+      exercicioGroup: this.getExercicioGroup(),
+      zoomGroup: this.getZoomGroup(),
+      disqusGroup: this.getDisqusGroup(),
+      scheduleGroup: this.getScheduleGroup()
+    });
+  }
+
+  private getInfoGroup(): FormGroup {
+    return this.fb.group({
+      titulo: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(128)]),
+      urlVideoGravado: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(1024)]),
+      descricao: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(10000)]),
+      observacao: new FormControl('', [Validators.minLength(50), Validators.maxLength(10000)])
+    });
+  }
+
+  private getExercicioGroup(): FormGroup {
+    return this.fb.group({
+      titulo: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(255)]),
+      descricao: new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(10000)]),
+      alunoFazUpload: new FormControl('', [Validators.required]),
+      respostaTemTexto: new FormControl('', [Validators.required])
+    });
+  }
+
+  private getZoomGroup(): FormGroup {
+    return this.fb.group({
+      temAulaAoVivo: new FormControl('', [Validators.required]),
+      dataHoraInicio: new FormControl('', [Validators.required]),
+      horario: new FormControl('', [Validators.required]),
+      topico: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(64)]),
+    });
+  }
+
+  private getDisqusGroup(): FormGroup {
+    return this.fb.group({
+      temDiscusao: new FormControl('', [Validators.required])
+    });
+  }
+
+  private getScheduleGroup(): FormGroup {
+    return this.fb.group({
+      liberadoEm: new FormControl(''),
+      temAgendamento: new FormControl(''),
+    });
+  }
+
+  /**
    * Capturar esses valores nos formularios
    */
   private setPatternValues() {
     this.atividade.aula.reuniao.duracao = '60';
   }
 
-
-
   publish() {
     this.atividade.criadoEm = moment(this.atividade.criadoEm).format('YYYY-MM-DD HH:mm:ss');
     this.atividade.liberadoEm = moment(this.atividade.liberadoEm).format('YYYY-MM-DD HH:mm:ss');
-    this.atividade.aula.reuniao.dataHoraInicio = moment(this.atividade.aula.reuniao.dataHoraInicio).format('YYYY-MM-DD HH:mm:ss');
+    // this.atividade.aula.reuniao.dataHoraInicio = moment(this.atividade.aula.reuniao.dataHoraInicio).format('YYYY-MM-DD HH:mm:ss');
     this.atividadeService.insert(this.atividade, this.files).subscribe((a: AtividadeModel) => {
       this.atividade = a;
       this.snack.open('Aula Criada com sucesso', 'BLZ! :)', {
@@ -85,7 +160,7 @@ export class ClassFormComponent implements OnInit {
   getQueryParams() {
     this.route.queryParamMap.subscribe((params) => {
       this.atividade.aula.turma.id = +params.get('turmaId');
-    })
+    });
   }
 
   getUrlParams() {
@@ -98,15 +173,7 @@ export class ClassFormComponent implements OnInit {
     });
   }
 
-  findByAulaId() {
-    this.atividadeService.findByAulaId(this.aulaId).subscribe((atividade: AtividadeModel) => {
-      this.atividade = atividade;
-    }, (err: HttpErrorResponse) => {
-      this.snack.open(err.error.message, null, {duration: 5000}).afterOpened().subscribe(() => {
-        this.location.back();
-      });
-    });
-  }
+
 
   recursos: Set<RecursoModel> = new Set<RecursoModel>();
 
