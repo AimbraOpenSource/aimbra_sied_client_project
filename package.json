@@ -24,7 +24,7 @@
     "@angular/youtube-player": "^9.2.1",
     "@types/youtube": "0.0.38",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "ngx-disqus": "^2.4.3",
     "popper.js": "^1.16.1",
