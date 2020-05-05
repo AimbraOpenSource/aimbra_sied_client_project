@@ -15,7 +15,6 @@ export class ReuniaoModel {
 
   /**
    * TODO Setar hora na data acima
-   * @param time
    */
   public set hora(hora: string) {
     const day = this.dataHoraInicio.getDay();
@@ -33,7 +32,7 @@ export class ReuniaoModel {
       .format('dd/MM/yyyy HH:mm:ss');
   }
 
-  public get hora() {
-    return this._hora;
+  public get hora(): string {
+    return this.dataHoraInicio.getHours + ':' + this.dataHoraInicio.getMinutes();
   }
 }

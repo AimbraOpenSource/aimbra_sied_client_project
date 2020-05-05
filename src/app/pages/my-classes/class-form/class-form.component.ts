@@ -16,7 +16,7 @@ import * as moment from 'moment';
 import {RecursoService} from '../../../core/services/recurso.service';
 import {RecursoModel} from '../../../core/models/recurso.model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AulaFormConfigService } from './aula-form-config';
+import { AtividadePatchFactory } from './atividade-patch.factory';
 
 @Component({
   selector: 'app-class-form',
@@ -31,6 +31,8 @@ export class ClassFormComponent implements OnInit {
   srcResult: any;
   atividade: AtividadeModel;
   files: Set<File>;
+
+  recursos: Set<RecursoModel> = new Set<RecursoModel>();
 
   atividadeFormGroup: FormGroup;
 
@@ -52,6 +54,7 @@ export class ClassFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.getUrlParams();
     this.getQueryParams();
   }
@@ -60,17 +63,31 @@ export class ClassFormComponent implements OnInit {
    * TODO Criar formulário para modo update
    */
   patchForm() {
-
+    this.atividadeFormGroup.patchValue(AtividadePatchFactory.getBody(this.atividade));
   }
 
   initForm() {
     this.atividadeFormGroup = this.getConfig();
   }
 
+  hasAulaAoVivo(): boolean {
+    const temAula = this.atividadeFormGroup.value.zoomGroup.temAulaAoVivo;
+    return temAula !== undefined && temAula !== null && temAula === true;
+  }
+
+  isDesejaAgendar(): boolean {
+    const isDesejaAgendar = this.atividadeFormGroup.value.scheduleGroup.temAgendamento;
+    return isDesejaAgendar !== undefined && isDesejaAgendar !== null && isDesejaAgendar === true;
+  }
+
   findByAulaId() {
     this.atividadeService.findByAulaId(this.aulaId).subscribe((atividade: AtividadeModel) => {
-      this.atividade = atividade;
-      this.initForm();
+      if (atividade) {
+        this.atividade = atividade;
+        this.patchForm();
+      } else {
+        this.atividade = new AtividadeModel();
+      }
     }, (err: HttpErrorResponse) => {
       this.snack.open(err.error.message, null, { duration: 5000 }).afterOpened().subscribe(() => {
         this.location.back();
@@ -174,9 +191,6 @@ export class ClassFormComponent implements OnInit {
   }
 
 
-
-  recursos: Set<RecursoModel> = new Set<RecursoModel>();
-
   private findAllRecursosByAulaId() {
     this.recursoService.findAllByAulaId(this.aulaId).subscribe((recursos: RecursoModel[]) => {
       console.log('recursos', recursos);
@@ -224,7 +238,7 @@ export class ClassFormComponent implements OnInit {
         withoutConfirmationText: true
       }
     }).afterClosed().subscribe((result: string) => {
-    })
+    });
   }
 
   onFileRemove(r: RecursoModel) {

@@ -7,5 +7,4 @@ export class AtividadeModel {
   criadoEm: string;
   liberadoEm: string;
   aula: AulaModel;
-
 }

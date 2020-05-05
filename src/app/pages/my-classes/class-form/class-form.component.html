@@ -93,7 +93,7 @@
               <mat-slide-toggle formControlName="temAulaAoVivo">Vai ter aula ao vivo deste conteúdo?</mat-slide-toggle>
               <mat-slide-toggle class="ml-5" *ngIf="isEditMode" >A aula ao vivo foi realizada?</mat-slide-toggle>
             </section>
-            <div class="row" *ngIf="atividade?.aula?.configuracao?.temAulaAoVivo === true" >
+            <div class="row" *ngIf="hasAulaAoVivo()" >
               <div class="col-4">
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Data da aula ao vivo</mat-label>
@@ -148,7 +148,7 @@
           <section class="mt-3 mb-3">
             <mat-slide-toggle formControlName="temAgendamento" color="primary">Deseja agendar?</mat-slide-toggle>
           </section>
-          <mat-form-field appearance="outline" class="w-100">
+          <mat-form-field appearance="outline" class="w-100" *ngIf="isDesejaAgendar()" >
             <mat-label>Deseja Agendar?</mat-label>
             <input matInput [matDatepicker]="schedule" formControlName="liberadoEm">
             <mat-datepicker-toggle matSuffix [for]="schedule"></mat-datepicker-toggle>
