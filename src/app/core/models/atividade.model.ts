@@ -7,4 +7,10 @@ export class AtividadeModel {
   criadoEm: string;
   liberadoEm: string;
   aula: AulaModel;
+
+  constructor() {
+    if (!this.aula) {
+      this.aula = new AulaModel();
+    }
+  }
 }

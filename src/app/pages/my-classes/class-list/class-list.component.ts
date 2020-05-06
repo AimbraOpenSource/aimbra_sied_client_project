@@ -98,7 +98,8 @@ export class ClassListComponent implements OnInit {
         title: 'Atenção!',
         message: 'Você deseja realmente remover esta Aula?',
         label: 'Digite SIM par confirmar',
-        buttonCancel: true
+        buttonCancel: true,
+        withoutConfirmationText: false
       }
     }).afterClosed().subscribe((result: string) => {
       if (result === 'SIM') {
@@ -114,14 +115,15 @@ export class ClassListComponent implements OnInit {
         this.snack.open('Removido com sucesso', 'Ok', {
           duration: 6000,
           panelClass: 'bg-sucess'
-        })
+        });
+        this.findAllByTurmaId();
       }
     }, (err: HttpErrorResponse) => {
       this.snack.open('Erro ao remover no servidor com o codigo ' + err.status, 'Ok', {
         duration: 6000,
         panelClass: 'bg-danger'
-      })
-    })
+      });
+    });
   }
 
   copyToClipboard() {

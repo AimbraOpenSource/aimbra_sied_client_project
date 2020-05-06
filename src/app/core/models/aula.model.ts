@@ -1,7 +1,7 @@
 import { TurmaModel } from './turma.model';
 import { AtividadeModel } from './atividade.model';
-import {ReuniaoModel} from "./reuniao.model";
-import {AulaConfiguracaoModel} from "./aula-configuracao.model";
+import {ReuniaoModel} from './reuniao.model';
+import {AulaConfiguracaoModel} from './aula-configuracao.model';
 
 
 
@@ -17,5 +17,19 @@ export class AulaModel {
   turma: TurmaModel;
   reuniao: ReuniaoModel;
   configuracao: AulaConfiguracaoModel;
+
+  constructor() {
+    if (!this.reuniao) {
+      this.reuniao = new ReuniaoModel();
+    }
+
+    if (!this.configuracao) {
+      this.configuracao = new AulaConfiguracaoModel();
+    }
+
+    if (!this.turma) {
+      this.turma = new TurmaModel();
+    }
+  }
 }
 

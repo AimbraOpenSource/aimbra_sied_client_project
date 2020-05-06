@@ -9,4 +9,13 @@ export class TurmaModel {
   curso: CursoModel;
   alunos: AlunoModel[];
   professor: ProfessorModel;
+
+  constructor() {
+    if (!this.alunos) {
+      this.alunos = [];
+    }
+    if (!this.professor) {
+      this.professor = new ProfessorModel();
+    }
+  }
 }

@@ -7,7 +7,7 @@ export abstract class AtividadePatchFactory {
         titulo: atividade.aula.titulo,
         urlVideoGravado: atividade.aula.urlVideoGravado,
         descricao: atividade.aula.descricao,
-        observacao: atividade.aula.descricao
+        observacao: atividade.aula.observacao
       },
       exercicioGroup: {
         titulo: atividade.titulo,

@@ -17,6 +17,8 @@ import {RecursoService} from '../../../core/services/recurso.service';
 import {RecursoModel} from '../../../core/models/recurso.model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AtividadePatchFactory } from './atividade-patch.factory';
+import { DateTimeUtil } from 'src/app/core/utils/date-time.util';
+import { AtividadeFormFactory } from './atividade-form.factory';
 
 @Component({
   selector: 'app-class-form',
@@ -152,10 +154,27 @@ export class ClassFormComponent implements OnInit {
     this.atividade.aula.reuniao.duracao = '60';
   }
 
+  private buildAtividade() {
+    this.atividadeFormGroup.value.zoomGroup.dataHoraInicio = DateTimeUtil.addTimeOnDate(
+      this.atividadeFormGroup.value.zoomGroup.dataHoraInicio,
+      this.atividadeFormGroup.value.zoomGroup.horario
+    );
+    this.atividadeFormGroup.value.scheduleGroup.liberadoEm = DateTimeUtil
+      .dateToString(this.atividadeFormGroup.value.scheduleGroup.liberadoEm);
+
+    if (!this.atividade.id) {
+      this.atividade = AtividadeFormFactory.build(this.atividadeFormGroup.value);
+    }
+    this.atividade.aula.turma.id = this.turmaId;
+    this.atividade.aula.id = this.aulaId;
+    if (!this.atividade.id) {
+      this.atividade.criadoEm = DateTimeUtil.dateToString(new Date());
+    }
+    console.log(this.atividade);
+  }
+
   publish() {
-    this.atividade.criadoEm = moment(this.atividade.criadoEm).format('YYYY-MM-DD HH:mm:ss');
-    this.atividade.liberadoEm = moment(this.atividade.liberadoEm).format('YYYY-MM-DD HH:mm:ss');
-    // this.atividade.aula.reuniao.dataHoraInicio = moment(this.atividade.aula.reuniao.dataHoraInicio).format('YYYY-MM-DD HH:mm:ss');
+    this.buildAtividade();
     this.atividadeService.insert(this.atividade, this.files).subscribe((a: AtividadeModel) => {
       this.atividade = a;
       this.snack.open('Aula Criada com sucesso', 'BLZ! :)', {
@@ -174,9 +193,11 @@ export class ClassFormComponent implements OnInit {
 
   }
 
+
+
   getQueryParams() {
     this.route.queryParamMap.subscribe((params) => {
-      this.atividade.aula.turma.id = +params.get('turmaId');
+      this.turmaId = +params.get('turmaId');
     });
   }
 
@@ -193,11 +214,10 @@ export class ClassFormComponent implements OnInit {
 
   private findAllRecursosByAulaId() {
     this.recursoService.findAllByAulaId(this.aulaId).subscribe((recursos: RecursoModel[]) => {
-      console.log('recursos', recursos);
       recursos.map(r => this.recursos.add(r));
     }, (err: HttpErrorResponse) => {
       console.error(err);
-    })
+    });
   }
 
   get isEditMode(): boolean {
@@ -217,6 +237,7 @@ export class ClassFormComponent implements OnInit {
       this.snack.open('O tamanho máximo de arquivo é 4M', 'Ok', { duration: 4000, verticalPosition: 'top' });
       return;
     }
+
     for (let i = 0; i < selectedFiles.length; i++) {
       this.files.add(selectedFiles[i]);
       const recurso = new RecursoModel();
